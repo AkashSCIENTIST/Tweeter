@@ -27,4 +27,31 @@ create table follows(
 	constraint fk_follower foreign key (follower)references users (username),
 	constraint fk_followee foreign key (followee)references users (username),
 	constraint pk_follwer_followee primary key(follower,followee)
-)
+);
+--drop table message_;
+create table message_(
+    time_ time,
+	sender varchar(20),
+	receiver varchar(20),
+	msg varchar(100),
+	constraint fk_sender foreign key (sender) references users (username),
+	constraint fk_receiver foreign key (receiver) references users (username),
+	constraint pk_msg primary key (time_,sender,receiver)
+);
+--drop table like_;
+create table like_(
+    username varchar(20),
+	tweetid integer,
+	constraint fk_username foreign key (username) references users (username),
+	constraint fk_tweetid foreign key (tweetid) references tweet(tweetid),
+	constraint pk_like primary key (username,tweetid)
+);
+create table comment_(
+    time_ time,
+	username varchar(20),
+	tweetid integer,
+	content_ varchar(100),
+	constraint fk_username foreign key (username) references users (username),
+	constraint fk_tweetid foreign key (tweetid) references tweet(tweetid),
+	constraint pk_comment primary key (time_,username,tweetid)
+);
