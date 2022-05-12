@@ -23,10 +23,10 @@ create table tweet (
 
 create table follows(
     follower varchar(20),
-	followee varchar(20),
+	follows varchar(20),
 	constraint fk_follower foreign key (follower)references users (username),
-	constraint fk_followee foreign key (followee)references users (username),
-	constraint pk_follwer_followee primary key(follower,followee)
+	constraint fk_follows foreign key (follows)references users (username),
+	constraint pk_follwer_follows primary key(follower,follows)
 );
 --drop table message_;
 create table message_(
