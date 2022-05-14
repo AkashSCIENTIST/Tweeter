@@ -22,7 +22,7 @@ create table tweet (
 );
 
 create table follows(
-    follower varchar(20),
+    	follower varchar(20),
 	follows varchar(20),
 	constraint fk_follower foreign key (follower)references users (username),
 	constraint fk_follows foreign key (follows)references users (username),
@@ -30,7 +30,7 @@ create table follows(
 );
 --drop table message_;
 create table message_(
-    time_ time,
+    	time_ time,
 	sender varchar(20),
 	receiver varchar(20),
 	msg varchar(100),
@@ -40,14 +40,14 @@ create table message_(
 );
 --drop table like_;
 create table like_(
-    username varchar(20),
+    	username varchar(20),
 	tweetid integer,
 	constraint fk_username foreign key (username) references users (username),
 	constraint fk_tweetid foreign key (tweetid) references tweet(tweetid),
 	constraint pk_like primary key (username,tweetid)
 );
 create table comment_(
-    time_ time,
+    	time_ time,
 	username varchar(20),
 	tweetid integer,
 	content_ varchar(100),
