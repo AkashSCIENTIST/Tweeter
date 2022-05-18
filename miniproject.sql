@@ -87,3 +87,36 @@ insert into users values('luffy','Laugh tale','CEO of Straw Hat Pirates','mdluff
 
 insert into users values('cookie','Mauritania','Bot in disguise','master.zan87@gmail.com',
 'https://en.wikipedia.org/wiki/HTTP_cookie','Cookie','X.x',null,'2002-01-01','2020-12-12');
+
+--follow table insertion
+
+--select * from follows;
+
+insert into follows values ('logeshwaran_29','loki'),
+	('logeshwaran_29','akash_06'),('logeshwaran_29','s_snape');
+
+insert into follows values ('cookie','loki'),
+	('cookie','luffy'),('cookie','s_snape'),('cookie','muskelon'),('cookie','logeshwaran_29'),('cookie','harshan_21'),
+	('cookie','archana_08'),('cookie','tharun_67'),('cookie','akash_06');
+
+insert into follows values ('muskelon','loki');
+
+insert into follows values ('loki','s_snape'),('loki','luffy');
+
+insert into follows values ('luffy','archana_08'),('luffy','akash_06'),('luffy','harshan_21'),('luffy','loki'),
+     ('luffy','s_snape');
+	 
+insert into follows values ('akash_06','loki'),
+	('akash_06','archana_08'),('akash_06','muskelon'),('akash_06','harshan_21');
+	
+insert into follows values ('akash_06','loki'),
+	('akash_06','archana_08'),('akash_06','muskelon'),('akash_06','harshan_21');
+	
+insert into follows values ('archana_08','luffy'),
+	('archana_08','akash_06'),('archana_08','tharun_67'),('archana_08','harshan_21'),('archana_08','logeshwaran_29');
+	
+insert into follows values ('tharun_67','harshan_21'),
+	('tharun_67','akash_06'),('tharun_67','logeshwaran_29'),('tharun_67','archana_08');
+	
+insert into follows values ('harshan_21','akash_06'),('harshan_21','tharun_67'),
+	('harshan_21','s_snape'),('harshan_21','logeshwaran_29'),('harshan_21','archana_08');
