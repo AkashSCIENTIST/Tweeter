@@ -1,5 +1,5 @@
 from flask import *
-from demo import getPhoto
+from demo import *
 #from embeddedsql import *
 app = Flask(__name__)
 
@@ -41,10 +41,13 @@ def tweet(tweet_id):
 def new_user():
     data = request.form
     files = request.files
-    joined_dict = files.update(data)
-    print(dict(data), dir(dict(files)['image']))
-    print(getPhoto("C:\\Users\\akash\\OneDrive\\Pictures\\akash.jpg"))
-    return redirect(url_for('feed'))
+    image = binaryFromPhotoObject(dict(files)["image"])
+    # print(binaryFromPhotoObject(dict(files)["image"])[:20])
+    # username, loc, bio, mailid, website, fname, lname, photo, dob
+    out = data.copy()
+    out['image'] = image
+    newUser(**out)
+    return redirect(url_for('home'))
 
 @app.route("/new_like", methods=['POST'])
 def new_like():
@@ -91,8 +94,31 @@ def new_unfollow():
     data = request.form
     print(data)
     follower = data['follower']
-    followee = data['followee']
+    follows = data['follows']
     return jsonify({"data":data})
+
+@app.route('/change_photo', methods=['GET'])
+def change_photo():
+    data = request.form
+    files = request.files
+    user = data['username']
+    image = dict(files)['image']
+    out = {
+        'user':user,
+        'image':image
+    }
+    return jsonify({"data":out})
+
+@app.route('/new_tweet', methods=['GET'])
+def new_tweet():
+    data = request.form
+    files = request.files
+    image = dict(files)['image']
+    out = {
+        'data':data,
+        'image':image
+    }
+    return jsonify({"data":out})
 
 if __name__ == '__main__':
 	app.run()
