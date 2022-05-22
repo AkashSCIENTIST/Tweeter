@@ -120,3 +120,17 @@ insert into follows values ('tharun_67','harshan_21'),
 	
 insert into follows values ('harshan_21','akash_06'),('harshan_21','tharun_67'),
 	('harshan_21','s_snape'),('harshan_21','logeshwaran_29'),('harshan_21','archana_08');
+	
+--insertion of tweet table
+
+insert into tweet values(1,'My variant is an alligator and the king of Asgard',null,current_timestamp,'loki');
+
+insert into tweet values(2,'I am the Lost Alien in Flat Earth seeking way to red planet',null,current_timestamp,'muskelon');
+
+insert into tweet values(3,'Coke #YOUARENEXT :)',null,current_timestamp,'muskelon');
+
+insert into tweet values(4,'Why didnt Strange use runes of Kof-Kol on Purple Titan?',null,current_timestamp,'muskelon');
+
+insert into tweet values(5,'Bully Maguire will hear about this Draco',null,current_timestamp,'s_snape');
+
+
