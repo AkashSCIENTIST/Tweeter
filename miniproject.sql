@@ -133,4 +133,18 @@ insert into tweet values(4,'Why didnt Strange use runes of Kof-Kol on Purple Tit
 
 insert into tweet values(5,'Bully Maguire will hear about this Draco',null,current_timestamp,'s_snape');
 
+insert into tweet values(6,'Steve Harrington - Dustin duo >> ',null,current_timestamp,'luffy');
+
+insert into tweet values(7,'Every thing is connected... Im the King Doubtie V in 300BC',null,current_timestamp,'logeshwaran_29');
+
+insert into tweet values(8,'햇빛 :)',null,current_timestamp,'archana_08');
+
+insert into tweet values(9,'Groove to Jolly Oh Gymkhana (#_#)',null,current_timestamp,'akash_06');
+
+insert into tweet values(10,'Nothin is true;; Everything is permitted #Xpertswordsman',null,current_timestamp,'tharun_67');
+
+insert into tweet values(11,'നിഷേധാത്മകത അവഗണിക്കുക =|',null,current_timestamp,'harshan_21');
+
+insert into tweet values(12,'எவ்வளவு பண்ணிட்டோம், இத பண்ணமாட்டோமா #twitterclone :)',null,current_timestamp,'akash_06');
+
 
