@@ -178,3 +178,50 @@ insert into group_members values('Cringe avoids me','akash_06');
 insert into group_members values('Earth 606','harshan_21');
 
 insert into group_members values('Earth 606','tharun_67');
+
+-- like table insertion
+
+select * from like_;
+
+insert into like_ values('muskelon',1);
+
+insert into like_ values('akash_06',1);
+
+insert into like_ values('cookie',1);
+
+insert into like_ values('luffy',12);
+
+insert into like_ values('harshan_21',12);
+
+insert into like_ values('tharun_67',12);
+
+insert into like_ values('archana_08',12);
+
+insert into like_ values('akash_06',2);
+
+insert into like_ values('cookie',3);
+
+insert into like_ values('akash_06',4);
+
+insert into like_ values('cookie',4);
+
+insert into like_ values('logeshwaran_29',5);
+
+insert into like_ values('archana_08',6);
+
+insert into like_ values('cookie',6);
+
+insert into like_ values('tharun_67',8);
+
+insert into like_ values('akash_06',8);
+
+insert into like_ values('harshan_21',8);
+
+insert into like_ values('cookie',9);
+
+insert into like_ values('archana_08',10);
+
+insert into like_ values('cookie',11);
+
+insert into like_ values('akash_06',11);
+
