@@ -157,4 +157,24 @@ insert into group_ values('Earth 606','muskelon',null,'Join here to stop twitter
 
 select * from group_;
 
+--groupmember table creation and value insertion
 
+create table group_members(grpname varchar(30),grpuser varchar(20));
+
+alter table group_members add constraint fk_grpname foreign key(grpname) references group_(grpname);
+
+alter table group_members add constraint fk_username foreign key(grpuser) references users(username);
+
+alter table group_members add constraint pk_grpmembers primary key(grpname,grpuser);
+
+insert into group_members values('Golden Trio','luffy');
+
+insert into group_members values('Golden Trio','loki');
+
+insert into group_members values('Cringe avoids me','cookie');
+
+insert into group_members values('Cringe avoids me','akash_06');
+
+insert into group_members values('Earth 606','harshan_21');
+
+insert into group_members values('Earth 606','tharun_67');
