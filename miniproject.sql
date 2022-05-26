@@ -109,9 +109,6 @@ insert into follows values ('luffy','archana_08'),('luffy','akash_06'),('luffy',
 insert into follows values ('akash_06','loki'),
 	('akash_06','archana_08'),('akash_06','muskelon'),('akash_06','harshan_21');
 	
-insert into follows values ('akash_06','loki'),
-	('akash_06','archana_08'),('akash_06','muskelon'),('akash_06','harshan_21');
-	
 insert into follows values ('archana_08','luffy'),
 	('archana_08','akash_06'),('archana_08','tharun_67'),('archana_08','harshan_21'),('archana_08','logeshwaran_29');
 	
@@ -146,5 +143,18 @@ insert into tweet values(10,'Nothin is true;; Everything is permitted #Xpertswor
 insert into tweet values(11,'നിഷേധാത്മകത അവഗണിക്കുക =|',null,current_timestamp,'harshan_21');
 
 insert into tweet values(12,'எவ்வளவு பண்ணிட்டோம், இத பண்ணமாட்டோமா #twitterclone :)',null,current_timestamp,'akash_06');
+
+-- create and insert group_
+create table group_(grpname varchar(30) primary key,grpadmin varchar(20),photo text, description varchar(100));
+
+alter table group_ add constraint fk_grpadmin foreign key(grpadmin) references users(username);
+
+insert into group_ values('Golden Trio','s_snape',null,'When something happens why its Always you three');
+
+insert into group_ values('Cringe avoids me','logeshwaran_29',null,'Classic Cringe here');
+
+insert into group_ values('Earth 606','muskelon',null,'Join here to stop twitter bots and clone');
+
+select * from group_;
 
 
