@@ -74,13 +74,6 @@ username varchar(20),poll_id integer,
 	constraint fk_poll_id foreign key (poll_id) references poll (Id_)
 );
 
-
-create table poll_posted_by(
-username varchar(20),poll_id integer,
-	constraint fk_username foreign key (username) references users (username),
-	constraint fk_poll_id foreign key (poll_id) references poll (Id_)
-);
-
 --select * from users;
 
 insert into users values('akash_06','Tirupur','CODE <> SLEEP <> REPEAT','20i306@psgtech.ac.in
