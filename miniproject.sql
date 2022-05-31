@@ -56,6 +56,17 @@ create table comment_(
 	constraint pk_comment primary key (time_,username,tweetid)
 );
 
+create table poll
+(Id_ integer,Content_ varchar(50),
+constraint pk_Id_ primary key(Id_)
+);
+
+create table vote(
+username varchar(20),poll_id integer,
+	constraint fk_username foreign key (username) references users (username),
+	constraint fk_poll_id foreign key (poll_id) references poll (Id_)
+);
+
 insert into users values('akash_06','Tirupur','CODE <> SLEEP <> REPEAT','20i306@psgtech.ac.in
 ','https://github.com/AkashSCIENTIST','Akash','SP',null,'2002-08-02','2020-10-15');
 
