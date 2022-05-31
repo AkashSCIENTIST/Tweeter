@@ -67,13 +67,27 @@ username varchar(20),poll_id integer,
 	constraint fk_poll_id foreign key (poll_id) references poll (Id_)
 );
 
+
+create table poll_posted_by(
+username varchar(20),poll_id integer,
+	constraint fk_username foreign key (username) references users (username),
+	constraint fk_poll_id foreign key (poll_id) references poll (Id_)
+);
+
+
+create table poll_posted_by(
+username varchar(20),poll_id integer,
+	constraint fk_username foreign key (username) references users (username),
+	constraint fk_poll_id foreign key (poll_id) references poll (Id_)
+);
+
+--select * from users;
+
 insert into users values('akash_06','Tirupur','CODE <> SLEEP <> REPEAT','20i306@psgtech.ac.in
 ','https://github.com/AkashSCIENTIST','Akash','SP',null,'2002-08-02','2020-10-15');
 
 insert into users values('tharun_67','Coimbatore','Seek into world of slo-motion to see wonders','21i467@psgtech.ac.in
 ','https://instagram.com/__tharunkc__?igshid=YmMyMTA2M2Y=','Tharun','KC',null,'2002-11-02','2022-02-28');
-
---select * from users;
 
 insert into users values('archana_08','Udumalpet','Sunshine Haze','20i308@psgtech.ac.in
 ','https://github.com/sunshine-haze321','Archana','E',null,'2003-02-01','2020-02-10');
