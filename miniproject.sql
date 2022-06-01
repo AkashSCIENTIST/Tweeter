@@ -61,17 +61,42 @@ create table poll
 constraint pk_Id_ primary key(Id_)
 );
 
+insert into poll values(1,'Rajasthan'), (1,'Gujarat');
+insert into poll values(2,'DayLight'), (2,'MoonLight');
+
 create table vote(
 username varchar(20),poll_id integer,
 	constraint fk_username foreign key (username) references users (username),
 	constraint fk_poll_id foreign key (poll_id) references poll (Id_)
 );
 
+insert into vote values('akash_06',121);
+insert into vote values('archana_08',122);
+insert into vote values('harshan_21',123);
+
 
 create table poll_posted_by(
 username varchar(20),poll_id integer,
 	constraint fk_username foreign key (username) references users (username),
-	constraint fk_poll_id foreign key (poll_id) references poll (Id_)
+	constraint fk_pollposted foreign key (poll_id) references poll (Id_)
+);
+
+create table poll_option(
+poll_id integer, option_ varchar,
+	constraint fk_polloption foreign key (poll_id) references poll (Id_),
+	constraint pk_poll_option primary key(option_)
+);
+
+create table group_(
+name_ varchar(20),group_admin varchar(20),photo text,description text,
+	constraint pk_group primary key(name_),
+	constraint fk_group foreign key(group_admin) references users(username) 
+);
+
+create table group_members(
+group_name varchar(20),username varchar(20),
+	constraint fk_groupmembers foreign key(group_name) references group_(name_),
+	constraint fk_groupmem foreign key(username) references users(username)
 );
 
 --select * from users;
