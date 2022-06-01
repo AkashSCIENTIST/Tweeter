@@ -57,47 +57,46 @@ create table comment_(
 );
 
 create table poll
-(Id_ integer,Content_ varchar(50),
-constraint pk_Id_ primary key(Id_)
+(id_ integer,content_ varchar(50),
+constraint pk_id_ primary key(id_)
 );
 
 insert into poll values(1,'Rajasthan'), (1,'Gujarat');
 insert into poll values(2,'DayLight'), (2,'MoonLight');
 
 create table vote(
-username varchar(20),poll_id integer,
+username varchar(20),poll_id integer,polloption text,
 	constraint fk_username foreign key (username) references users (username),
-	constraint fk_poll_id foreign key (poll_id) references poll (Id_)
+	constraint fk_poll_id foreign key (poll_id) references poll (Id_),
+	constraint pk_vote primary key (username,poll_id)
 );
 
-insert into vote values('akash_06',121);
-insert into vote values('archana_08',122);
-insert into vote values('harshan_21',123);
-
-
-create table poll_posted_by(
-username varchar(20),poll_id integer,
-	constraint fk_username foreign key (username) references users (username),
-	constraint fk_pollposted foreign key (poll_id) references poll (Id_)
-);
+---create table poll_posted_by(
+---username varchar(20),poll_id integer,
+	---constraint fk_username foreign key (username) references users (username),
+	---constraint fk_pollposted foreign key (poll_id) references poll (Id_)
+---);
 
 create table poll_option(
 poll_id integer, option_ varchar,
 	constraint fk_polloption foreign key (poll_id) references poll (Id_),
-	constraint pk_poll_option primary key(option_)
+	constraint pk_polloption primary key(poll_id,option_)
 );
 
 create table group_(
 name_ varchar(20),group_admin varchar(20),photo text,description text,
-	constraint pk_group primary key(name_),
-	constraint fk_group foreign key(group_admin) references users(username) 
+	constraint fk_group foreign key(group_admin) references users(username), 
+	constraint pk_groupp primary key(name_,group_admin)
 );
 
 create table group_members(
 group_name varchar(20),username varchar(20),
 	constraint fk_groupmembers foreign key(group_name) references group_(name_),
-	constraint fk_groupmem foreign key(username) references users(username)
+	constraint fk_groupmem foreign key(username) references users(username),
+	constraint pk_group primary key(group_name, username)
 );
+
+--select * from group_members;
 
 --select * from users;
 
