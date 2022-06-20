@@ -1,0 +1,50 @@
+--pgadmin
+
+select follows.follower, users.username, users.photo,(users.fname || ' ' || users.lname) as name_  from follows inner join users on users.username = follows.follows where follows = 'tharun_67';
+
+select follows.follows, users.username, users.photo,(users.fname || ' ' ||users.lname) as name_  from follows inner join users on users.username = follows.follower where follows = 'tharun_67';
+
+
+-- select follows from follows where follower = 'tharun_67';
+
+
+///VS CODE
+///python functions.py
+
+--prev version
+---def showfollower(username):
+    query = "select follower from follows where follows = '{}'".format(username)
+    cur.execute(query)
+    return [dict(i) for i in cur.fetchall()]
+
+def showfollows(username):
+    query = " select follows from follows where follower = '{}'".format(username) 
+    cur.execute(query)
+    return [dict(i) for i in cur.fetchall()]
+
+
+
+///
+---current version
+def showfollower(username):
+    query = '''select follows.follower, users.username as cur_user, 
+    users.photo,(users.fname || ' ' || users.lname) as cur_name from follows 
+    inner join users on users.username = follows.follows where follows = '{}';'''.format(username)
+    cur.execute(query)
+    return [dict(i) for i in cur.fetchall()]
+
+
+def showfollows(username):
+    query = '''select follows.follows, users.username as cur_user, 
+    users.photo,(users.fname || ' ' || users.lname) as cur_name from follows 
+    inner join users on users.username = follows.follower where follower = '{}';'''.format(username) 
+    cur.execute(query)
+    return [dict(i) for i in cur.fetchall()]
+
+def showgroupname(username):
+    query = '''select group_members.grp_name, group_.photo, group_.description from group_members 
+    INNER JOIN group_ on  group_.grpname = group_members.grp_name where grpmem = '{}';'''.format(username)
+    cur.execute(query)
+    return [dict(i) for i in cur.fetchall()]
+    
+    

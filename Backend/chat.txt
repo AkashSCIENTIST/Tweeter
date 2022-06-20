@@ -1,0 +1,44 @@
+create table chat (
+sender varchar(20),
+receiver varchar(20),
+msg text,
+time_ timestamp not null,
+constraint pk_chat primary key (sender,receiver,time_),
+constraint fk_chat_sender foreign key (sender) references users(username),
+constraint fk_chat_receiver foreign key (receiver) references users(username));
+
+
+insert into chat 
+values('archana_08','muskelon','So can you please explain what this all is about?',current_timestamp);
+insert into chat 
+values('muskelon','archana_08','Sure! this is just like any other social medias but a clone of twitter',current_timestamp);
+insert into chat 
+values('archana_08','muskelon','Cool, sounds fun',current_timestamp);
+insert into chat 
+values('muskelon','archana_08','yea, it sure is',current_timestamp);
+insert into chat 
+values('archana_08','muskelon','thanks for the small tour',current_timestamp);
+insert into chat 
+values('muskelon','archana_08','anytime:)',current_timestamp);
+insert into chat 
+values('archana_08','muskelon','See you later!',current_timestamp);
+insert into chat 
+values('muskelon','archana_08','Seeya',current_timestamp);
+
+
+insert into chat 
+values('harshan_21','loki','Hey, enna vetti ah?',current_timestamp);
+insert into chat 
+values('loki','harshan_21','ille bruh',current_timestamp);
+insert into chat 
+values('harshan_21','loki','apro un wife eppudi irukanga',current_timestamp);
+insert into chat 
+values('loki','harshan_21','haan fine',current_timestamp);
+insert into chat 
+values('harshan_21','loki','saptacha?',current_timestamp);
+insert into chat 
+values('loki','harshan_21','illaye',current_timestamp);
+insert into chat 
+values('harshan_21','loki','cheri na vaangitu varren',current_timestamp);
+insert into chat 
+values('loki','harshan_21','mikka nandri, double okay by akash and srikrishna',current_timestamp);

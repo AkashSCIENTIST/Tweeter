@@ -1,0 +1,35 @@
+table {
+  width: 100%;
+  overflow: auto;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 20px;
+  border-radius: 20px;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 10px;
+  overflow-x: auto;
+}
+
+th {
+  /*color: #fafafa;
+    background-color: #4b4b4b;*/
+  /* background-color: #89e219; */
+  background-color: blue;
+  color: white;
+}
+
+tr {
+  overflow-x: auto;
+}
+
+tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #efefef;
+}

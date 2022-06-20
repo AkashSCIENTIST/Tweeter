@@ -1,0 +1,121 @@
+.message{
+    border-width: 1px;
+    border-style: solid;
+    border-radius : 8px;
+    width: 40%;
+  }
+  
+  .sent{
+    background-color:rgb(253, 185, 185);
+    float:right;
+    /* padding: 10px; */
+  }
+  
+  .receive{
+    background-color: rgb(164, 222, 255);
+    float:left;
+    /* padding: 10px; */
+  }
+
+  .rows{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap : 10px;
+    /* border-style: solid; */
+    height: 100%;
+    border-radius: 20px;
+    border-width: 1px;
+    max-width: 95%;
+    /* background-color: rgb(42, 37, 42); */
+  
+  }
+
+  .column {
+    float: left;/* Should be removed. Only for demonstration */
+    overflow-y: auto;
+  }
+  
+  .left {
+    float: left;
+    width: 30%;
+    z-index: 100;
+    top: 0;
+    overflow-y: scroll;
+    position: relative;
+  }
+  
+  .right {
+    float: right;
+    width: 60%;
+    right: 0;
+    overflow-y: scroll;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+
+  }
+
+  .textbox {
+    height: 7%;
+    position: fixed;
+    bottom: 0;
+    background-color: #fafafa;
+    width: 100%;
+    margin-top: 0;
+    /*max-width: 728px;*/
+    display: flex;
+    font-size: 1.5rem;
+    /* border-radius: 20px; */
+    z-index: 100;
+    float: center;
+    overflow: hidden;
+  }
+  
+  .textbox button {
+    align-items: center;
+    background-color: blue;
+    color: white;
+    width: 5%;
+  }
+  
+  input {
+    line-height: 1.5;
+    width: 60%;
+    font-size: 1.5rem;
+    background: rgb(58, 58, 58);
+    color: white;
+    outline: none;
+    border: none;
+    padding: 0 10px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 20px 0px 0px 20px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(69, 106, 255); 
+    border-radius: 20px 0px 0px 20px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4240c7; 
+  }
+
+  .chat_user_style:hover{
+    box-shadow: 0px 10px 10px 0px solid #000;
+    cursor: pointer;
+    
+  }

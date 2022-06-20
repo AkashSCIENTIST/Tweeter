@@ -1,0 +1,166 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+
+/* base styles */
+
+* {
+  margin: 0;
+  /* font-family: "Quicksand"; */
+  font-family: "Roboto";
+  color: #333;
+}
+.navbar {
+  padding-bottom: 5px;
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+  margin: 0 auto;
+  border-bottom: 1px solid #f0f0f0;
+  max-height: 5%;
+  background-image: url("./seamless_pattern.jpg");
+}
+
+.navbar .links {
+  margin-left: auto;
+}
+.navbar a {
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 6px;
+}
+.navbar a:hover {
+  border-bottom: 5px solid #1da1f2;
+  border-radius: 0px 0px 5px 5px;
+}
+.content {
+  /* display: flex;
+  column-gap: 15px;
+  flex-wrap: wrap; */
+  width: 90%;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.carousel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.blog-preview {
+  padding: 10px 16px;
+  margin: 20px 0;
+  border-bottom: 1px solid #fafafa;
+}
+
+.blog-preview:hover {
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.blog-preview h2 {
+  font-size: 20px;
+  color: #1da1f2;
+  margin-bottom: 8px;
+}
+
+.blog-preview button {
+  background-color: #1da1f2;
+  color: white;
+  font-size: 18px;
+  border: 1px solid #f2f2f2;
+  border-radius: 5px;
+}
+
+.blog-preview a {
+  text-decoration: none;
+}
+
+.blog-details h2 {
+  font-size: 20px;
+  color: #1da1f2;
+  margin-bottom: 10px;
+}
+
+.blog-details div {
+  margin: 20px 0;
+}
+
+.blog-details button {
+  background: #1da1f2;
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.create {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+.create label {
+  text-align: left;
+  display: block;
+}
+.create h2 {
+  font-size: 20px;
+  color: #1da1f2;
+  margin-bottom: 30px;
+}
+.create input,
+.create textarea,
+.create select {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+  border-radius: 8px;
+}
+.create button {
+  background: #1da1f2;
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.tweet:hover {
+  z-index: 4;
+  /* background-color: rgba(0, 255, 255, 0.1); */
+  background-image: url("./seamless_pattern.jpg");
+  transition-duration: 0.7s;
+  -webkit-transition-duration: 0.7s;
+  border-color: #1da1f2;
+  border-width: 2.5px;
+  box-shadow: 5px 10px #888888;
+}
+
+.tweet {
+  transition-duration: 0.5s;
+  transform: translateX(50px);
+  box-shadow: 1px 2px #888888;
+  border-width: 1px;
+}
+
+/* .stylish_logo:hover {
+  background-image: -webkit-linear-gradient(#a9d1e9, #1da1f2);
+  border-radius: 20px;
+  color: white;
+  transition-delay: 0.1s;
+  -webkit-transition-delay: 0.1s;
+} */
+
+.stylish_logo {
+  transition-delay: 0.1s;
+  -webkit-transition-delay: 0.1s;
+  padding: 10px;
+  color: #1da1f2;
+}
+
+.stylish_logo:hover {
+  border-bottom: 0px solid blue;
+}

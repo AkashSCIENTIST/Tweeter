@@ -1,0 +1,23 @@
+.namespace{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap : 10px;
+    border-style: solid;
+    height: 150%;
+    /* border-radius: 20px; */
+    border-width: 1px;
+    max-width: 95%;
+    border-color: white;
+    background-color: rgba(245, 222, 179, 0.836);
+  }
+
+.username{
+    border-style: solid;
+    border-color: black;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap : 10px;
+    background-color: rgb(255, 255, 255);
+  }

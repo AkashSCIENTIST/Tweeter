@@ -1,0 +1,74 @@
+.split {
+  width: 50%;
+}
+
+.left {
+  left: 0;
+  height: 100%;
+}
+.right {
+  right: 0;
+  height: 100%;
+}
+
+.image {
+  width: 200px;
+  height: 200px;
+  border-radius: 15%;
+}
+
+.profile h6 {
+  color: grey;
+}
+
+.profile button {
+  color: white;
+  background-color: #1DA1F2;
+  border-radius: 8px;
+  width: 100px;
+  cursor: pointer;
+}
+
+.profile p {
+  max-width: 80%;
+}
+
+.GroupProfile h6 {
+  color: grey;
+}
+
+.GroupProfile button {
+  color: #1DA1F2;
+  background-color: white;
+  border-radius: 8px;
+  width: 100px;
+}
+
+.GroupProfile p {
+  max-width: 80%;
+}
+
+.cursor_pointer{
+  cursor: pointer;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.head {
+  align-self: flex-start;
+  padding-left: 7rem;
+  margin: 1rem;
+}
+
+.nounderline{
+  text-decoration: none
+}

@@ -1,0 +1,25 @@
+.flex-y-row1 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 10px;
+}
+
+.user_image {
+    max-width: 25px;
+    max-height: 25px;
+    border-radius: 50%;
+  }
+  
+.userdata {
+    display: inline-flex;
+    gap: 8px;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 20px;
+    padding: 5px;
+  }
+
+.userdata:hover{
+    background-color: rgb(243, 237, 226);
+}
