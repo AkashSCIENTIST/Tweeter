@@ -1,10 +1,9 @@
 //import { useEffect } from "react";
 import "./tweetpage.css";
 import logo from "./logo512.png";
-import { Link } from "react-router-dom";
 
 function MiniTweet(props) {
-  console.log("mini tweet : ", props);
+  //console.log("mini tweet : ", props);
   return (
     <div className='tweet'>
       {/* <Link to={`/tweetpage/${props.tweetid}`} className="nounderline" target={"_blank"}> */}

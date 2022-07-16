@@ -242,7 +242,21 @@ def new_group_member():
     group_name = data['group_name']
     username = data['username']
     return jsonify({"data":data})
-
+@app.route('/change_group_photo', methods=['POST'])
+def change_group_photo():
+    data = request.form
+    files = request.files
+    groupname = data['groupname']
+    image = binaryFromPhotoObject(dict(files)["image"])
+    b64_image = hexToBase64(image)
+    out = {
+        'user':groupname,
+        'image':image,
+        "b64_image" : b64_image
+    }
+    changeGroupPhoto(groupname, b64_image)
+    return jsonify({"data":out})
+    
 @app.route('/delete_group_member', methods=['POST'])
 def delete_group_member():
     data = request.form

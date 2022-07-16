@@ -8,7 +8,7 @@ import {
 } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import UserData from "./UserData";
+import { Link } from "react-router-dom";
 
 const GroupProfile = (props) => {
   function post(url, body, callback) {
@@ -118,17 +118,38 @@ const GroupProfile = (props) => {
             worked as a marketing manager for a tech software startup. He
             graduated with honors from Columbia University with a dual degree in
             Business Administration and Creative Writing."
+
           </p>
         )}
         <div>
           <br></br>
           <h3>Group Members</h3>
-          {grpmem &&
-            grpmem.map((memb) => (
-              <>
-                <UserData username={memb.username} photo={memb.photo} />
-              </>
-            ))}
+          <br></br>
+
+            <div className="carousel">
+      {grpmem &&
+            grpmem.map((user) => (
+          <div key={user.username}>
+            <Link to={`/user/${user.username}`} target='_blank' className="nounderline">
+              <div>
+                {!user.photo && (
+                  <img src={image} alt='profilephoto' className='user_image' />
+                )}
+                {user.photo && (
+                  <img
+                    src={`data:image/jpg;base64,${user.photo}`}
+                    alt='profilephoto'
+                    className='user_image'
+                  />
+                )}
+                <br></br>
+                {user.username && <div>{" " + user.username}</div>}
+                {!user.username && <div>Demo User/Group</div>}
+              </div>
+            </Link>
+          </div>
+        ))}
+    </div>
         </div>
       </div>
     </div>

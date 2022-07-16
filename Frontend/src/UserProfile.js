@@ -4,6 +4,7 @@ import Profile from "./Profile";
 import UserTweets from "./UserTweets";
 import "./profile.css";
 import axios from "axios";
+import Loading from "./Loading";
 
 function UserProfile() {
   const { username } = useParams();
@@ -19,14 +20,21 @@ function UserProfile() {
   }, []);
 
   return (
-    <div className='flex'>
-      <div>{data && <Profile data={data} />}</div>
-      <div className='center'>
-        <div className='head'>Tweets</div>
-        <UserTweets username={username} />
-        End of Tweets
-      </div>
-    </div>
+    <>
+    {data && 
+      <div>
+        <div className='flex'>
+          <div>{data && <Profile data={data} />}</div>
+            <div className='center'>
+              <div className='head'>Tweets</div>
+              <UserTweets username={username} />
+              End of Tweets
+            </div>
+          </div>
+        </div>
+    }
+    {!data && <Loading/>}
+  </>
   );
 }
 

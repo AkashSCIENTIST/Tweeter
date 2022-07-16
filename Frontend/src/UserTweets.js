@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import MiniTweet from "./MiniTweet";
-import "./tweetpage.css";
 import "./profile.css";
-import { Link } from "react-router-dom";
+import "./tweetpage.css";
+import Loading from "./Loading";
 
 function UserTweets(props) {
-  console.log("usertweets : ", props);
+  //console.log("usertweets : ", props);
   const { username } = props;
   const [data, setData] = useState();
-  const [counter, setCounter] = useState();
-  console.log(username);
+  const [counter, setCounter] = useState(0);
+  //console.log(username);
   useEffect(() => {
     fetch(`http://localhost:5000/tweets_by_user/${username}`)
       .then((res) => {
@@ -20,14 +20,12 @@ function UserTweets(props) {
         return;
       });
   }, [username]);
-  console.log(data);
 
   return (
     <>
-      {data &&
+      {data && 
         data.map((tweet) => (
           <>
-            {/* <a href={`http://localhost:5000/tweetpage/${tweet.tweetid}`} target="_blank" rel="noreferrer"> */}
             <MiniTweet
               key={counter}
               counter={counter}
@@ -40,11 +38,10 @@ function UserTweets(props) {
               tweetid={tweet.tweetid}
               photo={tweet.photo}
             />
-
             <br></br>
-            {/* </a> */}
           </>
-        ))}
+        ))} 
+      {!data && <Loading/>}
     </>
   );
 }

@@ -1,3 +1,15 @@
+-- drop table group_members;
+-- drop table group_;
+-- drop table poll_option;
+-- drop table vote;
+-- drop table poll;
+-- drop table comment_;
+-- drop table like_;
+-- drop table message_;
+-- drop table tweet;
+-- drop table follows;
+-- drop table users;
+
 create table users (
 	username varchar(20),
 	loc varchar(30),
@@ -101,18 +113,6 @@ create table group_members(
 	constraint pk_groupmemb primary key(grp_name,grpmem)
 );
 
--- drop table group_members;
--- drop table group_;
--- drop table poll_option;
--- drop table vote;
--- drop table poll;
--- drop table comment_;
--- drop table like_;
--- drop table message_;
--- drop table tweet;
--- drop table follows;
--- drop table users;
-
 create sequence tweet_id_seq start with 30 increment by 1 maxvalue 1000;
 create sequence poll_id_seq start with 30 increment by 1 maxvalue 1000;
 
@@ -182,6 +182,7 @@ select * from follows;
 
 --insert into tweet values(nextval('tweet_id_seq'),'My variant is an alligator and the king of Asgard',null,current_timestamp,'loki');
 --insert into tweet values(nextval('tweet_id_seq'),'I am the Lost Alien in Flat Earth seeking way to red planet',null,current_timestamp,'muskelon');
+
 insert into tweet values(1,'My variant is an alligator and the king of Asgard',null,current_timestamp,'loki');
 
 insert into tweet values(2,'I am the Lost Alien in Flat Earth seeking way to red planet',null,current_timestamp,'muskelon');

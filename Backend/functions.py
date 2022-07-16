@@ -48,6 +48,11 @@ def changePhoto(username, photo):
     cur.execute(query)
     conn.commit()
 
+def changeGroupPhoto(groupname, photo):
+    query = "update group_ set photo = '{}' where grpname = '{}'".format(photo, groupname)
+    cur.execute(query)
+    conn.commit()
+
 def deleteUser(username):
     query = "delete from users where username = {username}".format()
     cur.execute(query)
@@ -59,7 +64,7 @@ def newLike(tweet_id, user_id):
     conn.commit()
 
 def newComment(tweet_id, username, content):
-    query = "insert into comment_ (time_, tweetid, username, content_) values (current_timestamp, {}, '{}', '{}')".format(tweet_id, username, content)
+    query = "insert into comment_ (time_, tweetid, username, content_) values (current_timestamp, {}, '{}', '{}')".format(tweet_id, username, content.replace("'", "\'"))
     print(query)
     cur.execute(query)
     conn.commit()
