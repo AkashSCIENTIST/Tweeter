@@ -5,7 +5,7 @@ git clone https://github.com/AkashSCIENTIST/Tweeter.git
 cd Tweeter
 ```
 
-After this, open three terminals in the folder
+After this, open two terminals in the folder
 
 ```shell
 cd Frontend
