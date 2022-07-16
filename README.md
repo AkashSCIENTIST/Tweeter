@@ -18,6 +18,12 @@ cd Frontend
 python new_rest.py
 ```
 
+## ER diagram
+<img src="Photos\ER.PNG">
+
+## Normalized Schema Diagram
+<img src="Photos\schema_diagram.jpeg">
+
 ## Screenshots
 
 ##### New User (Sign Up)
