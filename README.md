@@ -86,7 +86,5 @@ python new_rest.py
 </img><br>Harshan R</a></td>
 <td><a href="https://github.com/LOGESHWARAN-C" target="_blank"><img src="https://avatars.githubusercontent.com/u/95399936?v=4" alt="Logeshwaran" height="100px" width="100px">
 </img><br>Logeshwaran C</a></td>
-<td><a href="https://github.com/KcT71" target="_blank"><img src="https://avatars.githubusercontent.com/u/104819565?v=4" alt="Tharun" height="100px" width="100px">
-</img><br>Tharun K C</a></td>
 </tr>
 </table>
