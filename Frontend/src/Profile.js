@@ -6,19 +6,22 @@ import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import Loading from "./Loading";
+import MiniTweet from "./MiniTweet";
 
 const Profile = ({ data }) => {
   console.log("profile : ", data);
   const curUser = localStorage.getItem("username");
-  const [user, setUser] = useState(data.username);
+  const [user, setUser] = useState(data.profile.username);
   const [isFollowing, setIsFollowing] = useState(true);
+  const [followers, setFollowers] = useState(data.followers);
 
   useEffect(() => {
     var query = `http://localhost:5000/is_following?curuser=${curUser}&user=${user}`;
     console.log(query);
     axios.get(query).then((response) => {
       setIsFollowing(response.data.is_following);
-      console.log(isFollowing);
       console.log(response);
     });
   });
@@ -29,6 +32,9 @@ const Profile = ({ data }) => {
       .then((response) => {
         console.log(response);
         window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
@@ -38,46 +44,87 @@ const Profile = ({ data }) => {
       .then((response) => {
         console.log(response);
         window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
   return (
     <>
       <div className='profile'>
-        <div className='split left'>
+        <div className='split profileleft'>
           <center>
             <div>
-              {data.photo && (
+              {data.profile.photo && (
                 <img
-                  src={`data:image/jpg;base64,${data.photo}`}
+                  src={`data:image/jpg;base64,${data.profile.photo}`}
                   alt='profile picture'
                   className='image'
                 />
               )}
-              {!data.photo && (
+              {!data.profile.photo && (
                 <img src={image} alt='profile picture' className='image' />
               )}
             </div>
           </center>
+          <div className='profilecarousel'>
+
+            <div>Followed by :</div>
+          </div>
+          <div className='profilecarousel'>
+            {followers &&
+              followers.map((user) => (
+                <div key={user.username}>
+                  <Link
+                    to={`/user/${user.username}`}
+                    target='_blank'
+                    className='nounderline'>
+                    <div>
+                      {!user.photo && (
+                        <img
+                          src={image}
+                          alt='profilephoto'
+                          className='user_image'
+                        />
+                      )}
+                      {user.photo && (
+                        <img
+                          src={`data:image/jpg;base64,${user.photo}`}
+                          alt='profilephoto'
+                          className='user_image'
+                        />
+                      )}
+                      <br></br>
+                      {user.username && <div>{" " + user.username}</div>}
+                      {!user.username && <div>Demo User/Group</div>}
+                    </div>
+                  </Link>
+                </div>
+              ))}
+          </div>
         </div>
 
-        <div className='split right'>
-          {data.username && <h1>@{data.username}</h1>}
-          {!data.username && <h1> UserName </h1>}
-          {data.fname + data.lname && (
-            <h3>{data.fname + " " + data.lname}</h3>
+        <div className='split profileright'>
+          {data.profile?.username && <h1>@{data.profile.username}</h1>}
+          {!data.profile?.username && <h1> UserName </h1>}
+          {data.profile?.fname + data?.lname && (
+            <h3>{data.profile.fname + " " + data.profile.lname}</h3>
           )}
-          {!(data.fname + data.lname) && <h3> Name </h3>}
-          {data.website && (
-            <a href={`${data.website}`} target='_blank' rel='noreferrer'>
-              <h5>{data.website}</h5>
+          {!(data.profile?.fname + data?.lname) && <h3> Name </h3>}
+          {data.profile.website && (
+            <a
+              href={`${data.profile?.website}`}
+              target='_blank'
+              rel='noreferrer'>
+              <h5>{data.profile.website}</h5>
             </a>
           )}
-          {data.loc && <h6>Location: {data.loc}</h6>}
-          {data.joined_from && (
-            <h6>{"Joined from : " + data.joined_from}</h6>
+          {data.profile?.loc && <h6>Location: {data.profile.loc}</h6>}
+          {data.profile?.joined_from && (
+            <h6>{"Joined from : " + data.profile.joined_from}</h6>
           )}
-          {!data.joined_from && <h6> Joined From </h6>}
+          {!data.profile?.joined_from && <h6> Joined From </h6>}
           {curUser !== user && (
             <>
               <br></br>
@@ -89,7 +136,25 @@ const Profile = ({ data }) => {
             </>
           )}
           <br></br>
-          <p>{data.bio}</p>
+          <p>{data?.profile?.bio}</p>
+          <br></br>
+          {data.tweets &&
+            data.tweets.map((tweet) => (
+              <>
+                <MiniTweet
+                  key={tweet.tweetid}
+                  userphoto={tweet.userphoto}
+                  name={tweet.author}
+                  username={tweet.username}
+                  time={"Today"}
+                  content={tweet.content_}
+                  tweetid={tweet.tweetid}
+                  photo={tweet.photo}
+                />
+                <br></br>
+              </>
+            ))}
+          {!data && <Loading />}
         </div>
       </div>
     </>

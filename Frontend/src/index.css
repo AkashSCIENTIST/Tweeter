@@ -20,8 +20,27 @@
   background-image: url("./seamless_pattern.jpg");
 }
 
+@media only screen and (max-width: 925px) {
+.navbar{
+  flex-direction: column;
+  padding-bottom: 20px;
+}
+}
+
+@media only screen and (max-width: 745px) {
+  .navbar .links{
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: repeat(3, 200px);
+    padding-bottom: 20px;
+  }
+}
+
 .navbar .links {
+  display: flex;
+  align-items: center;
   margin-left: auto;
+  margin-right: auto;
 }
 .navbar a {
   margin-left: 16px;
@@ -32,13 +51,18 @@
   border-bottom: 5px solid #1da1f2;
   border-radius: 0px 0px 5px 5px;
 }
+.navbar .logo{
+  margin-left: auto;
+  margin-right: auto;
+}
 .content {
   /* display: flex;
   column-gap: 15px;
   flex-wrap: wrap; */
   width: 90%;
   margin: 40px auto;
-  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .carousel {
@@ -141,7 +165,7 @@
 
 .tweet {
   transition-duration: 0.5s;
-  transform: translateX(50px);
+  /* transform: translateX(50px); */
   box-shadow: 1px 2px #888888;
   border-width: 1px;
 }

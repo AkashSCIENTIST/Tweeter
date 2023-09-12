@@ -14,7 +14,7 @@ npm start
 ```
 
 ```shell
-cd Frontend
+cd Backend
 python new_rest.py
 ```
 

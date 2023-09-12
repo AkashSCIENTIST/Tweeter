@@ -36,7 +36,27 @@ def user(user):
     query = "select * from users where username = '{}'".format(user)
     cur.execute(query)
     data = [dict(i) for i in cur.fetchall()]
-    return jsonify(data)
+    d = {}
+    d['profile'] = data[0]
+
+    query = '''
+    select users.username, (users.fname || ' ' || users.lname) as author, users.photo as userphoto, tweet.tweetid, tweet.content_, tweet.photo
+    from tweet inner join users on
+    tweet.author = users.username  and users.username = '{}'
+    '''.format(user)
+    cur.execute(query)
+    data = cur.fetchall()
+    data2 = [dict(i) for i in data]
+    d['tweets'] = data2
+
+    d['followers'] = getFollowersOf(user)
+
+    return jsonify(d)
+
+@app.route('/delete_tweet/<tweet_id>', methods=['GET'])
+def delete_tweet(tweet_id):
+    deleteTweetById(tweet_id)
+    return "deleted"
     
 @app.route('/feed/<user>')
 #@cross_origin()
@@ -395,4 +415,5 @@ def leave_group():
     return data
 
 if __name__ == '__main__':
-	app.run(debug=True)
+	# app.run(debug=True)
+    app.run()

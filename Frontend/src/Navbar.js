@@ -19,7 +19,7 @@ const Navbar = () => {
 
   return (
     <div className='navbar'>
-      <a href='/'>
+      <a href='/'className="logo">
         <h1 className='stylish_logo'>🪶Tweeter</h1>
         {username && (
           <p>

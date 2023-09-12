@@ -54,7 +54,7 @@ const GroupProfile = (props) => {
     axios
       .get(`http://localhost:5000/group_detail/${groupname}/${curuser}`)
       .then((res) => {
-        console.log(res,res.data.isMember);
+        console.log(res, res.data.isMember);
         // console.log(res.data.members);
         setAdmin(res.data.data[0].group_admin);
         setPhoto(res.data.data[0].photo);
@@ -63,7 +63,7 @@ const GroupProfile = (props) => {
         setIsMember(res.data.isMember);
         setGrpmem([...res.data.members]);
       });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [groupname]);
 
   function joinHandler() {
@@ -86,70 +86,80 @@ const GroupProfile = (props) => {
   return (
     <div className='GroupProfile'>
       <div className='split left'>
-        <center>
+        {/* <center> */}
           <div>
             {photo && (
-              <img src={`data:image/jpg;base64,${photo}`} alt='profile picture' className='image' />
+              <img
+                src={`data:image/jpg;base64,${photo}`}
+                alt='profile picture'
+                className='image'
+              />
             )}
             {!photo && (
               <img src={image} alt='profile picture' className='image' />
             )}
+            <br></br>
           </div>
-        </center>
-      </div>
-
-      <div className='split right'>
+        {/* </center> */}
         {groupName && <h1>{groupName}</h1>}
         {!groupName && <h1> GroupName </h1>}
         <br></br>
-        {admin && <h3>@{admin}</h3>}
-        {!admin && <h3>Admin</h3>}
+        {admin && <h3>Admin : @{admin}</h3>}
+        {!admin && <h3>Admin placeholder</h3>}
         <br></br>
-        {!isMember && <button onClick={joinHandler} className="cursor_pointer">Join</button>}
-        {isMember && <button onClick={leaveHandler} className="cursor_pointer">Leave</button>}
+        {!isMember && (
+          <button onClick={joinHandler} className='cursor_pointer'>
+            Join
+          </button>
+        )}
+        {isMember && (
+          <button onClick={leaveHandler} className='cursor_pointer'>
+            Leave
+          </button>
+        )}
         <br></br>
         <br></br>
         {desc && <p>{desc}</p>}
-        {!desc && (
-          <p>
-            "Rodney Erickson is a content marketing professional at HubSpot, an
-            inbound marketing and sales platform that helps companies attract
-            visitors, convert leads, and close customers. Previously, Rodney
-            worked as a marketing manager for a tech software startup. He
-            graduated with honors from Columbia University with a dual degree in
-            Business Administration and Creative Writing."
+        {!desc && <p>Group's Bio</p>}
+      </div>
 
-          </p>
-        )}
+      <div className='split right'>
         <div>
           <br></br>
           <h3>Group Members</h3>
           <br></br>
 
-            <div className="carousel">
-      {grpmem &&
-            grpmem.map((user) => (
-          <div key={user.username}>
-            <Link to={`/user/${user.username}`} target='_blank' className="nounderline">
-              <div>
-                {!user.photo && (
-                  <img src={image} alt='profilephoto' className='user_image' />
-                )}
-                {user.photo && (
-                  <img
-                    src={`data:image/jpg;base64,${user.photo}`}
-                    alt='profilephoto'
-                    className='user_image'
-                  />
-                )}
-                <br></br>
-                {user.username && <div>{" " + user.username}</div>}
-                {!user.username && <div>Demo User/Group</div>}
-              </div>
-            </Link>
+          <div className='carousel'>
+            {grpmem &&
+              grpmem.map((user) => (
+                <div key={user.username}>
+                  <Link
+                    to={`/user/${user.username}`}
+                    target='_blank'
+                    className='nounderline'>
+                    <div>
+                      {!user.photo && (
+                        <img
+                          src={image}
+                          alt='profilephoto'
+                          className='user_image'
+                        />
+                      )}
+                      {user.photo && (
+                        <img
+                          src={`data:image/jpg;base64,${user.photo}`}
+                          alt='profilephoto'
+                          className='user_image'
+                        />
+                      )}
+                      <br></br>
+                      {user.username && <div>{" " + user.username}</div>}
+                      {!user.username && <div>Demo User/Group</div>}
+                    </div>
+                  </Link>
+                </div>
+              ))}
           </div>
-        ))}
-    </div>
         </div>
       </div>
     </div>

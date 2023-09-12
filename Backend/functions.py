@@ -260,5 +260,14 @@ def newGroup(photo, admin, groupname, groupbio):
     cur.execute(query)
     conn.commit()
 
+def getFollowersOf(user):
+    query = "SELECT users.username, users.photo FROM follows INNER JOIN users ON follows.follower = users.username where follows.follows = '{}'".format(user)
+    cur.execute(query)
+    return [dict(i) for i in cur.fetchall()]
+
+def deleteTweetById(tweet_id):
+    query = "delete from tweet where tweetid = {}".format(tweet_id)
+    cur.execute(query)
+
 # if __name__ == '__main__':
 #     print(getPollFeed())

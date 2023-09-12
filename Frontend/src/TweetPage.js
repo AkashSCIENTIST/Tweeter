@@ -4,10 +4,12 @@ import { useParams } from "react-router-dom";
 import logo from "./logo512.png";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { confirmAlert } from "react-confirm-alert";
+import { useNavigate } from "react-router-dom";
 
 function post(url, body, callback) {
   let headers = new Headers();
-
+  const navigate = useNavigate();
   console.log(headers);
   headers.append("Content-Type", "application/json");
   headers.append("Accept", "application/json");
@@ -47,15 +49,13 @@ function TweetPage(props) {
 
   function submitHandler(e) {
     if (content !== "") {
-      alert(content);
-      console.log(content);
       post(
         "http://localhost:5000/new_comment",
         { username, content, tweet_id: tweet_page_id },
         (res) => {
           console.log(res);
           window.location.reload(false);
-        }
+        },
       );
     }
   }
@@ -81,6 +81,54 @@ function TweetPage(props) {
       window.location.reload();
     });
   }
+
+  function deleteTweetHandler() {
+    confirmAlert({
+      title: "Delete Tweet",
+      message: "Confrm ?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            axios
+              .get("http://localhost:8000/delete_tweet/{}".format(tweet_page_id))
+              .then((res) => {
+                toast("Order Placed", {
+                  position: "bottom-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "dark",
+                });
+                navigate("/");
+              })
+              .catch((err) => {
+                console.log(err);
+                toast(`Error Occured`, {
+                  position: "bottom-right",
+                  autoClose: 400,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "dark",
+                });
+              });
+          },
+        },
+        {
+          label: "No",
+          onClick: () => {},
+        },
+      ],
+    });
+  }
+
+  function deleteCommentHandler() {}
 
   useEffect(() => {
     if (tweet_page_id) {
@@ -132,27 +180,23 @@ function TweetPage(props) {
                   <br></br>
                   <b>{data.content_}</b>
                   <br></br>
-                  <center>
-                    {data.photo && (
-                      <>
-                        <br></br>
-                        <img
-                          src={`data:image/jpg;base64,${data.photo}`}
-                          alt='profilephoto'
-                        />
-                      </>
-                    )}
-                    {data.photosrc && (
-                      <>
-                        <br></br>
-                        <img
-                          src={data.photosrc}
-                          alt='profilephoto'
-                          className='headerphoto'
-                        />
-                      </>
-                    )}
-                  </center>
+
+                  {data.username === username && (
+                    <>
+                      <br></br>
+                      <button
+                        style={{
+                          color: "#fafafa",
+                          backgroundColor: "#3DA3F4",
+                          borderRadius: "8px",
+                          borderColor: "#3DA3F4",
+                          cursor: "pointer",
+                        }}
+                        onClick={deleteTweetHandler}>
+                        Delete
+                      </button>
+                    </>
+                  )}
                   <br></br>
                 </div>
               ))}
@@ -190,6 +234,71 @@ function TweetPage(props) {
               <br></br>
             </div>
 
+            {/*Like Section*/}
+            <div>
+              <br></br>
+              Likes
+              <br />
+              {!isLiked && (
+                <>
+                  <button
+                    style={{
+                      color: "#fafafa",
+                      backgroundColor: "#3DA3F4",
+                      borderRadius: "8px",
+                      borderColor: "#3DA3F4",
+                    }}
+                    onClick={likeHandler}>
+                    Like 💖
+                  </button>
+                </>
+              )}
+              {isLiked && (
+                <>
+                  <button
+                    style={{
+                      color: "#3DA3F4",
+                      backgroundColor: "white",
+                      borderRadius: "8px",
+                      borderColor: "#3DA3F4",
+                    }}
+                    onClick={UnlikeHandler}>
+                    Unlike 💔
+                  </button>
+                </>
+              )}
+              <br></br>
+              <br />
+              <div className='carousel'>
+                {likes &&
+                  likes.map((like) => (
+                    <Link
+                      to={`/user/${like.username}`}
+                      target='_blank'
+                      className='nounderline'>
+                      <div>
+                        {!like.userphoto && (
+                          <img
+                            src={logo}
+                            alt='profilephoto'
+                            className='user_image'
+                          />
+                        )}
+                        {like.userphoto && (
+                          <img
+                            src={`data:image/jpg;base64,${like.userphoto}`}
+                            alt='profilephoto'
+                            className='user_image'
+                          />
+                        )}
+                        {like.username && <div>{" " + like.username}</div>}
+                        {!like.username && <div>Demo User/Group</div>}
+                      </div>
+                    </Link>
+                  ))}
+              </div>
+            </div>
+            <br></br>
             {comments &&
               comments.map((comment) => (
                 <div>
@@ -213,8 +322,19 @@ function TweetPage(props) {
                             className='user_image'
                           />
                         )}
-                        <br></br>
                         <h3>{comment.content_}</h3>
+                        {/* {comment.username === username && (
+                          <button
+                            style={{
+                              color: "#fafafa",
+                              backgroundColor: "#3DA3F4",
+                              borderRadius: "8px",
+                              borderColor: "#3DA3F4",
+                            }}
+                            onClick={deleteCommentHandler}>
+                            Delete
+                          </button>
+                        )} */}
                       </div>
                       <br></br>
                     </Link>
@@ -225,70 +345,6 @@ function TweetPage(props) {
                 </div>
               ))}
             <p>End of Comments</p>
-          </div>
-        </div>
-        {/*Like Section*/}
-        <div>
-          <br></br>
-          Likes
-          <br />
-          {!isLiked && (
-            <>
-              <button
-                style={{
-                  color: "#fafafa",
-                  backgroundColor: "#3DA3F4",
-                  borderRadius: "8px",
-                  borderColor: "#3DA3F4",
-                }}
-                onClick={likeHandler}>
-                Like 💖
-              </button>
-            </>
-          )}
-          {isLiked && (
-            <>
-              <button
-                style={{
-                  color: "#3DA3F4",
-                  backgroundColor: "white",
-                  borderRadius: "8px",
-                  borderColor: "#3DA3F4",
-                }}
-                onClick={UnlikeHandler}>
-                Unlike 💔
-              </button>
-            </>
-          )}
-          <br></br>
-          <br />
-          <div className='carousel'>
-            {likes &&
-              likes.map((like) => (
-                <Link
-                  to={`/user/${like.username}`}
-                  target='_blank'
-                  className='nounderline'>
-                  <div>
-                    {!like.userphoto && (
-                      <img
-                        src={logo}
-                        alt='profilephoto'
-                        className='user_image'
-                      />
-                    )}
-                    {like.userphoto && (
-                      <img
-                        src={`data:image/jpg;base64,${like.userphoto}`}
-                        alt='profilephoto'
-                        className='user_image'
-                      />
-                    )}
-                    {like.username && <div>{" " + like.username}</div>}
-                    {!like.username && <div>Demo User/Group</div>}
-                  </div>
-                </Link>
-              ))}
           </div>
         </div>
       </div>

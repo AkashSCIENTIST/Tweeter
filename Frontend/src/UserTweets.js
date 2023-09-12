@@ -3,6 +3,7 @@ import MiniTweet from "./MiniTweet";
 import "./profile.css";
 import "./tweetpage.css";
 import Loading from "./Loading";
+import axios from "axios";
 
 function UserTweets(props) {
   //console.log("usertweets : ", props);
@@ -11,25 +12,20 @@ function UserTweets(props) {
   const [counter, setCounter] = useState(0);
   //console.log(username);
   useEffect(() => {
-    fetch(`http://localhost:5000/tweets_by_user/${username}`)
+    axios.get(`http://localhost:5000/tweets_by_user/${username}`)
       .then((res) => {
-        return res.json();
-      })
-      .then((json) => {
-        setData(json);
-        return;
+        console.log('tweets', res.data);
+        setData(res.data);
       });
   }, [username]);
 
   return (
-    <>
-      {data && 
+    <div className='tweets'>
+      {data &&
         data.map((tweet) => (
           <>
             <MiniTweet
-              key={counter}
-              counter={counter}
-              setCounter={setCounter}
+              key={tweet.tweetid}
               userphoto={tweet.userphoto}
               name={tweet.author}
               username={tweet.username}
@@ -40,9 +36,9 @@ function UserTweets(props) {
             />
             <br></br>
           </>
-        ))} 
-      {!data && <Loading/>}
-    </>
+        ))}
+      {!data && <Loading />}
+    </div>
   );
 }
 
