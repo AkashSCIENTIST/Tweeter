@@ -1,19 +1,20 @@
 import { useRef, useEffect } from "react";
 import "./Sample.css";
 import useFetch from "./useFetch";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate } from "react-router-dom";
 
 function Chat(props) {
   const divRef = useRef(null);
   let curuser = localStorage.getItem("username");
-  const histroy = useHistory();
+  const navigate = useNavigate();
+  if (!curuser) navigate("/");
   // eslint-disable-next-line no-unused-vars
   const { data, ispending, error } = useFetch(
-    `http://localhost:5000/get_chat/${curuser}/${props.chatuser}`
+    `http://localhost:5000/get_chat/${curuser}/${props.chatuser}`,
   );
   useEffect(() => {
-    if (!curuser) histroy.push("/");
-  }, []);
+    if (!curuser) navigate("/");
+  });
   const user = localStorage.getItem("username");
 
   console.log(data);

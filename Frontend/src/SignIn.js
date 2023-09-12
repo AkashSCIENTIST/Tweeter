@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignIn = (props) => {
   const [username, setUserName] = useState("");
   const [mail, setMail] = useState("");
-  const histroy = useHistory();
+  const navigate = useNavigate();
   const localuser = localStorage.getItem("username");
 
   const handleSubmit = (e) => {

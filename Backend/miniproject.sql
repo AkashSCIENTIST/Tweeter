@@ -68,6 +68,7 @@ create table comment_(
     time_ TIMESTAMP not null,
 	username varchar(20) not null,
 	tweetid integer not null,
+	_id serial unique,
 	content_ varchar(100) not null,
 	constraint fk_username foreign key (username) references users (username) on delete cascade,
 	constraint fk_tweetid foreign key (tweetid) references tweet(tweetid) on delete cascade,

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate } from "react-router-dom";
 
 const NewGroup = () => {
   function post(url, body, callback) {
@@ -35,7 +35,7 @@ const NewGroup = () => {
   const [groupname, setGroupName] = useState("");
   const [groupphoto, setGroupPhoto] = useState("");
   const [groupbio, setGroupBio] = useState("");
-  const histroy = useHistory();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,7 +45,7 @@ const NewGroup = () => {
 
     post("http://localhost:5000/new_group", Groupadded, () => {
       console.log("new Group added");
-      histroy.push("/groups");
+      navigate("/groups");
     });
   };
 
@@ -56,7 +56,7 @@ const NewGroup = () => {
         <label>Group Name:</label>
         <input
           type='text'
-          pattern="[^\s]+"
+          pattern='[^\s]+'
           required
           onChange={(e) => setGroupName(e.target.value)}
         />

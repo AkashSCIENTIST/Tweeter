@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [username, setUserName] = useState(null);
-  const history = useHistory();
+  const history = useNavigate();
 
   useEffect(() => {
     setUserName(localStorage.getItem("username"));
@@ -19,7 +19,7 @@ const Navbar = () => {
 
   return (
     <div className='navbar'>
-      <a href='/'className="logo">
+      <a href='/' className='logo'>
         <h1 className='stylish_logo'>🪶Tweeter</h1>
         {username && (
           <p>
@@ -47,11 +47,10 @@ const Navbar = () => {
                 color: "#fafafa",
                 backgroundColor: "#1DA1F2",
                 borderRadius: "8px",
-                paddingRight:"15px"
+                paddingRight: "15px",
               }}>
               + New Tweet
             </Link>
-            
           </>
         )}
         {!username && (

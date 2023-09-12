@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
-import {
-  useHistory,
-  useParams,
-} from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import "./votepage.css";
+import "react-confirm-alert/src/react-confirm-alert.css";
+import { confirmAlert } from "react-confirm-alert";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function post(url, body, callback) {
   let headers = new Headers();
@@ -31,7 +32,7 @@ function post(url, body, callback) {
   })
     .then((json) => {
       console.log(json);
-      alert();
+      // alert();
       callback(json);
     })
     .catch((err) => {
@@ -46,13 +47,13 @@ const Vote = () => {
   const [optionCount, setOptionCount] = useState();
   const [voted, setVoted] = useState();
   const [author, setAuthor] = useState();
-  const histroy = useHistory();
+  const navigate = useNavigate();
   const username = localStorage.getItem("username");
   const { pollid } = useParams();
 
   useEffect(() => {
     if (!username) {
-      histroy.push("/");
+      navigate("/");
     }
     var query = `http://localhost:5000/vote/${pollid}`;
     console.log(query);
@@ -82,6 +83,51 @@ const Vote = () => {
     post(url, data, (res) => {
       console.log(res);
     });
+  };
+
+  const deletePoll = (e) => {
+    confirmAlert({
+      title: "Delete Poll",
+      message: "Confirm ?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            axios
+              .get(`http://localhost:5000/delete_poll/${pollid}`)
+              .then((res) => {
+                toast("Poll Deleted", {
+                  position: "bottom-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                });
+                navigate("/polls");
+              })
+              .catch((err) => {
+                console.log(err);
+                toast(`Error Occured`, {
+                  position: "bottom-right",
+                  autoClose: 400,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                });
+              });
+          },
+        },
+        {
+          label: "No",
+          onClick: () => {},
+        },
+      ],
+    });
+
   };
 
   return (
@@ -141,6 +187,25 @@ const Vote = () => {
           </>
         )}
       </div>
+      {username === author && (
+        <center>
+          <br></br>
+          <button
+            onClick={deletePoll}
+            style={{
+              color: "white",
+              backgroundColor: "blue",
+              borderRadius: "15%",
+              borderColor: "#3DA3F4",
+              height: "50px",
+              width: "120px",
+              cursor: "pointer"
+            }}>
+            Delete Poll
+          </button>
+        </center>
+      )}
+      <ToastContainer />
     </>
   );
 };

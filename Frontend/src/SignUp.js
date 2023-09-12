@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function post(url, body, callback) {
   let headers = new Headers();
@@ -40,12 +40,12 @@ const SignUp = (props) => {
   const [lastname, setLastName] = useState("");
   const [photo, setPhoto] = useState("");
   const [dateofbirth, setDateOfBirth] = useState("");
-  const histroy = useHistory();
+  const navigate = useNavigate();
   const localuser = localStorage.getItem("username");
 
   useEffect(() => {
     if (localuser) {
-      histroy.push("/");
+      navigate("/");
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -68,11 +68,11 @@ const SignUp = (props) => {
 
     console.log(Useradded);
 
-    //histroy.push("/");
+    //navigate("/");
     post("http://localhost:5000/new_user_2", Useradded, (json) => {
       console.log(json);
       //window.location.reload(false);
-      histroy.push("/signin");
+      navigate("/signin");
       localStorage.setItem("username", username);
     });
   };

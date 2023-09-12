@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate } from "react-router-dom";
 
 function post(url, body, callback) {
   let headers = new Headers();
@@ -36,16 +36,16 @@ const NewPoll = () => {
   const [optionb, setoptionb] = useState("");
   const [optionc, setoptionc] = useState("");
   const username = localStorage.getItem("username");
-  const histroy = useHistory();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const poll_body = { Question, optiona, optionb, optionc, username };
 
-    post('http://localhost:5000/new_poll', poll_body, (res) =>{
+    post("http://localhost:5000/new_poll", poll_body, (res) => {
       console.log(res);
-      histroy.push('/polls');
-    })
+      navigate("/polls");
+    });
   };
 
   return (

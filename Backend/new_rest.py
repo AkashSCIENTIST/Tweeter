@@ -55,8 +55,9 @@ def user(user):
 
 @app.route('/delete_tweet/<tweet_id>', methods=['GET'])
 def delete_tweet(tweet_id):
+    print("to delete", tweet_id)
     deleteTweetById(tweet_id)
-    return "deleted"
+    return jsonify({"statjs":"deleted"})
     
 @app.route('/feed/<user>')
 #@cross_origin()
@@ -262,18 +263,25 @@ def new_group_member():
     group_name = data['group_name']
     username = data['username']
     return jsonify({"data":data})
+
 @app.route('/change_group_photo', methods=['POST'])
+@cross_origin()
 def change_group_photo():
     data = request.form
     files = request.files
+    # print(list(files), list(data))
     groupname = data['groupname']
-    image = binaryFromPhotoObject(dict(files)["image"])
-    b64_image = hexToBase64(image)
+    # image = binaryFromPhotoObject(data["image"])
+    # b64_image = hexToBase64(image)
+    image = data["image"]
+    b64_image = data['image']
     out = {
         'user':groupname,
         'image':image,
         "b64_image" : b64_image
     }
+
+    print(out)
     changeGroupPhoto(groupname, b64_image)
     return jsonify({"data":out})
     
@@ -336,6 +344,11 @@ def poll_feed():
     data = getPollFeed()
     return jsonify(data)
 
+@app.route("/delete_poll/<poll_id>", methods=['GET'])
+def delete_poll(poll_id):
+    deletePollById(poll_id)
+    return jsonify({"res":"success"})
+
 
 @app.route('/new_comment', methods=['POST'])
 @cross_origin()
@@ -351,6 +364,11 @@ def comments_by_tweeter_id(tweetid):
     data = commentsByTweetId(tweetid)
     #print("Tweetid :", tweetid, data2)
     return jsonify(data)
+
+@app.route('/delete_comment/<comment_id>', methods=['GET'])
+def delete_comment(comment_id):
+    deleteCommentById(comment_id)
+    return jsonify({"res":"comment deleted"})
 
 @app.route('/test')
 @cross_origin()

@@ -112,7 +112,7 @@ def Auth(username):
 
 def commentsByTweetId(tweetid):
     query = '''
-    select comment_.tweetid, comment_.content_, users.username, (users.fname || ' ' || users.lname) as author, users.photo as userphoto 
+    select comment_.time_, comment_._id, comment_.tweetid, comment_.content_, users.username, (users.fname || ' ' || users.lname) as author, users.photo as userphoto 
     from comment_ inner join users on
     comment_.username = users.username and comment_.tweetid = {}
 	order by comment_.time_;
@@ -268,6 +268,19 @@ def getFollowersOf(user):
 def deleteTweetById(tweet_id):
     query = "delete from tweet where tweetid = {}".format(tweet_id)
     cur.execute(query)
+    conn.commit()
+
+def deleteCommentById(comment_id):
+    query = "delete from comment_ where _id = {}".format(comment_id)
+    cur.execute(query)
+    conn.commit()
+    return
+
+def deletePollById(poll_id):
+    query = "delete from poll where id_ = {}".format(poll_id)
+    cur.execute(query)
+    conn.commit()
+    return
 
 # if __name__ == '__main__':
 #     print(getPollFeed())

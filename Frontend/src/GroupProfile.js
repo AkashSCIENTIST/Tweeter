@@ -2,10 +2,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import "./profile.css";
 import image from "./logo512.png";
-import {
-  useHistory,
-  useParams,
-} from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -42,13 +39,14 @@ const GroupProfile = (props) => {
   }
   const { groupname } = useParams();
   const [groupName, setGroupName] = useState();
-  const histroy = useHistory();
+  const navigate = useNavigate();
   const [desc, setDesc] = useState();
   const [photo, setPhoto] = useState();
   const [admin, setAdmin] = useState();
   const [isMember, setIsMember] = useState();
   const [grpmem, setGrpmem] = useState([]);
   const curuser = localStorage.getItem("username");
+  const [newPhoto, setNewPhoto] = useState();
 
   useEffect(() => {
     axios
@@ -70,7 +68,7 @@ const GroupProfile = (props) => {
     const data = { grpname: groupName, username: curuser };
     post(`http://localhost:5000/join_group`, data, () => {
       console.log(data);
-      //histroy.push("/groups");
+      //navigate("/groups");
       window.location.reload();
     });
   }
@@ -83,28 +81,43 @@ const GroupProfile = (props) => {
     });
   }
 
+  function changePhoto() {
+    let data = { groupname: groupName, image: newPhoto };
+    console.log(data);
+    post("http://localhost:5000/change_group_photo", data, () => {
+      // window.location.reload();
+    });
+  }
+
   return (
     <div className='GroupProfile'>
       <div className='split left'>
         {/* <center> */}
-          <div>
-            {photo && (
-              <img
-                src={`data:image/jpg;base64,${photo}`}
-                alt='profile picture'
-                className='image'
-              />
-            )}
-            {!photo && (
-              <img src={image} alt='profile picture' className='image' />
-            )}
-            <br></br>
-          </div>
+        <div>
+          {photo && (
+            <img
+              src={`data:image/jpg;base64,${photo}`}
+              alt='profile picture'
+              className='image'
+            />
+          )}
+          {!photo && (
+            <img src={image} alt='profile picture' className='image' />
+          )}
+          <br></br>
+        </div>
         {/* </center> */}
         {groupName && <h1>{groupName}</h1>}
         {!groupName && <h1> GroupName </h1>}
         <br></br>
-        {admin && <h3>Admin : @{admin}</h3>}
+        {admin && (
+          <h3>
+            Admin :{" "}
+            <Link to={`/user/${admin}`} target='_blank'>
+              @{admin}
+            </Link>
+          </h3>
+        )}
         {!admin && <h3>Admin placeholder</h3>}
         <br></br>
         {!isMember && (
@@ -117,6 +130,20 @@ const GroupProfile = (props) => {
             Leave
           </button>
         )}
+        {/* {curuser === admin && (
+          <>
+            <br />
+            <br />
+            <input
+              type='file'
+              name='Change Photo'
+              onChange={(event) => {
+                setNewPhoto(event.target.files[0]);
+              }}
+            />
+            <button onClick={changePhoto}>Change</button>
+          </>
+        )} */}
         <br></br>
         <br></br>
         {desc && <p>{desc}</p>}

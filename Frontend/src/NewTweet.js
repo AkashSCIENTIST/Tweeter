@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate } from "react-router-dom";
 
 function post(url, body, callback) {
   let headers = new Headers();
@@ -37,10 +37,10 @@ const Create = () => {
   const [username, setUsername] = useState();
   const [content, setContent] = useState("");
   const [photo, setPhoto] = useState("");
-  const histroy = useHistory();
+  const navigate = useNavigate();
 
-  useEffect(()=>{
-    setUsername(localStorage.getItem('username'))
+  useEffect(() => {
+    setUsername(localStorage.getItem("username"));
   }, []);
 
   function handleSubmit(e) {
@@ -52,10 +52,9 @@ const Create = () => {
     post("http://localhost:5000/new_tweet", tweet, (res) => {
       console.log(res);
       alert("POsted");
-      histroy.push("/");
+      navigate("/");
     });
   }
-
 
   return (
     <div className='create'>

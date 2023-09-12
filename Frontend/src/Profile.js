@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import "./profile.css";
 import image from "./logo512.png";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -69,7 +69,6 @@ const Profile = ({ data }) => {
             </div>
           </center>
           <div className='profilecarousel'>
-
             <div>Followed by :</div>
           </div>
           <div className='profilecarousel'>

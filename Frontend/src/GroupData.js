@@ -22,6 +22,7 @@ function GroupData(props) {
             borderRadius: "8px",
             paddingRight: "15px",
             borderColor: "#1DA1F2",
+            cursor: "pointer"
           }}>
           + New Group
         </button>

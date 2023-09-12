@@ -5,11 +5,14 @@ import logo from "./logo512.png";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function post(url, body, callback) {
   let headers = new Headers();
-  const navigate = useNavigate();
+
   console.log(headers);
   headers.append("Content-Type", "application/json");
   headers.append("Accept", "application/json");
@@ -39,6 +42,7 @@ function post(url, body, callback) {
 
 function TweetPage(props) {
   const username = localStorage.getItem("username");
+  const navigate = useNavigate();
   const { tweetid: tweet_page_id } = useParams();
   const [content, setContent] = useState("");
   const [tweetid, setTweetid] = useState(1);
@@ -91,9 +95,9 @@ function TweetPage(props) {
           label: "Yes",
           onClick: () => {
             axios
-              .get("http://localhost:8000/delete_tweet/{}".format(tweet_page_id))
+              .get("http://localhost:5000/delete_tweet/" + tweet_page_id)
               .then((res) => {
-                toast("Order Placed", {
+                toast("Deleted", {
                   position: "bottom-right",
                   autoClose: 5000,
                   hideProgressBar: false,
@@ -101,7 +105,6 @@ function TweetPage(props) {
                   pauseOnHover: true,
                   draggable: true,
                   progress: undefined,
-                  theme: "dark",
                 });
                 navigate("/");
               })
@@ -115,7 +118,6 @@ function TweetPage(props) {
                   pauseOnHover: true,
                   draggable: true,
                   progress: undefined,
-                  theme: "dark",
                 });
               });
           },
@@ -128,7 +130,49 @@ function TweetPage(props) {
     });
   }
 
-  function deleteCommentHandler() {}
+  function deleteCommentHandler(comment_id) {
+    confirmAlert({
+      title: "Delete Comment",
+      message: "Confirm ?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            axios
+              .get("http://localhost:5000/delete_comment/" + comment_id)
+              .then((res) => {
+                toast("Comment Deleted", {
+                  position: "bottom-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                });
+                window.location.reload();
+              })
+              .catch((err) => {
+                console.log(err);
+                toast(`Error Occured`, {
+                  position: "bottom-right",
+                  autoClose: 400,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                });
+              });
+          },
+        },
+        {
+          label: "No",
+          onClick: () => {},
+        },
+      ],
+    });
+  }
 
   useEffect(() => {
     if (tweet_page_id) {
@@ -236,40 +280,44 @@ function TweetPage(props) {
 
             {/*Like Section*/}
             <div>
-              <br></br>
-              Likes
+              Liked by:
               <br />
-              {!isLiked && (
-                <>
-                  <button
-                    style={{
-                      color: "#fafafa",
-                      backgroundColor: "#3DA3F4",
-                      borderRadius: "8px",
-                      borderColor: "#3DA3F4",
-                    }}
-                    onClick={likeHandler}>
-                    Like 💖
-                  </button>
-                </>
-              )}
-              {isLiked && (
-                <>
-                  <button
-                    style={{
-                      color: "#3DA3F4",
-                      backgroundColor: "white",
-                      borderRadius: "8px",
-                      borderColor: "#3DA3F4",
-                    }}
-                    onClick={UnlikeHandler}>
-                    Unlike 💔
-                  </button>
-                </>
-              )}
-              <br></br>
               <br />
               <div className='carousel'>
+                {!isLiked && (
+                  <>
+                    <button
+                      style={{
+                        color: "#fafafa",
+                        backgroundColor: "#3DA3F4",
+                        borderRadius: "15%",
+                        borderColor: "#3DA3F4",
+                        height: "100px",
+                        width: "100px",
+                        cursor: "pointer",
+                      }}
+                      onClick={likeHandler}>
+                      Like 💖
+                    </button>
+                  </>
+                )}
+                {isLiked && (
+                  <>
+                    <button
+                      style={{
+                        color: "#3DA3F4",
+                        backgroundColor: "white",
+                        borderRadius: "15%",
+                        borderColor: "#3DA3F4",
+                        height: "100px",
+                        width: "100px",
+                        cursor: "pointer",
+                      }}
+                      onClick={UnlikeHandler}>
+                      Unlike 💔
+                    </button>
+                  </>
+                )}
                 {likes &&
                   likes.map((like) => (
                     <Link
@@ -299,6 +347,7 @@ function TweetPage(props) {
               </div>
             </div>
             <br></br>
+
             {comments &&
               comments.map((comment) => (
                 <div>
@@ -322,29 +371,33 @@ function TweetPage(props) {
                             className='user_image'
                           />
                         )}
-                        <h3>{comment.content_}</h3>
-                        {/* {comment.username === username && (
-                          <button
-                            style={{
-                              color: "#fafafa",
-                              backgroundColor: "#3DA3F4",
-                              borderRadius: "8px",
-                              borderColor: "#3DA3F4",
-                            }}
-                            onClick={deleteCommentHandler}>
-                            Delete
-                          </button>
-                        )} */}
+                        {comment.username && (
+                          <div>{" " + comment.username}</div>
+                        )}
+                        {!comment.username && <div>Demo User/Group</div>}
                       </div>
                       <br></br>
                     </Link>
-                    {comment.username && <div>{" " + comment.username}</div>}
-                    {!comment.username && <div>Demo User/Group</div>}
+                    {comment.username === username && (
+                      <button
+                        style={{
+                          color: "#fafafa",
+                          backgroundColor: "#3DA3F4",
+                          borderRadius: "8px",
+                          borderColor: "#3DA3F4",
+                          cursor: "pointer"
+                        }}
+                        onClick={(e) => deleteCommentHandler(comment._id)}>
+                        Delete
+                      </button>
+                    )}
+                    <h3>{comment.content_}</h3>
                   </div>
                   <br></br>
                 </div>
               ))}
             <p>End of Comments</p>
+            <ToastContainer />
           </div>
         </div>
       </div>

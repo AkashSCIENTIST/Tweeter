@@ -11,6 +11,11 @@
   float: right;
 }
 
+.left > img{
+  width: 100px;
+    height: 100px;
+}
+
 .right {
   right: 0;
   width: 40%;
@@ -41,6 +46,7 @@
 }
 
 .user_image {
+  object-fit: cover;
   width: 100px;
   height: 100px;
   border-radius: 15%;
@@ -53,7 +59,6 @@
 
 .comment {
   right: 0;
-  max-width: 75%;
   border-radius: 10px;
   border-width: 1px;
   border-style: solid;

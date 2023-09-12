@@ -3,7 +3,7 @@ import MiniPoll from "./MiniPoll";
 import Error from "./Error";
 import Loading from "./Loading";
 import useFetch from "./useFetch";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 
 function PollFeed() {
   const {
