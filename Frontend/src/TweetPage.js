@@ -51,6 +51,20 @@ function TweetPage(props) {
   const [likes, setLikes] = useState();
   const [isLiked, setIsLiked] = useState();
 
+  function openimg(base64img) {
+    var w = window.open("about:blank");
+
+    // FireFox seems to require a setTimeout for this to work.
+    setTimeout(() => {
+      w.document.body.appendChild(w.document.createElement("iframe")).src =
+        base64img;
+      w.document.body.style.margin = 0;
+      w.document.getElementsByTagName("iframe")[0].style.width = "100%";
+      w.document.getElementsByTagName("iframe")[0].style.height = "100%";
+      w.document.getElementsByTagName("iframe")[0].style.border = 0;
+    }, 0);
+  }
+
   function submitHandler(e) {
     if (content !== "") {
       post(
@@ -221,9 +235,28 @@ function TweetPage(props) {
                     </div>
                   </Link>
                   <br></br>
+                  <p className='contenttime'>Posted at {data.time_}</p>
                   <br></br>
-                  <b>{data.content_}</b>
+                  <p className='contenttext'>{data.content_}</p>
                   <br></br>
+                  {data.photo && (
+                    <>
+                      <br />
+                      <center>
+                        <img
+                          onClick={(e) =>
+                            openimg(`data:image/jpg;base64,${data.photo}`)
+                          }
+                          className='tweetphoto'
+                          style={{
+                            cursor: "pointer",
+                          }}
+                          src={`data:image/jpg;base64,${data.photo}`}></img>
+                      </center>
+
+                      <br />
+                    </>
+                  )}
 
                   {data.username === username && (
                     <>
@@ -235,6 +268,7 @@ function TweetPage(props) {
                           borderRadius: "8px",
                           borderColor: "#3DA3F4",
                           cursor: "pointer",
+                          float: "right",
                         }}
                         onClick={deleteTweetHandler}>
                         Delete
@@ -245,6 +279,77 @@ function TweetPage(props) {
                 </div>
               ))}
           </div>
+          {/*Like Section*/}
+          <div>
+            <br/>
+            <br/>
+            Liked by:
+            <br />
+            <br />
+            <div className='carousel'>
+              {!isLiked && (
+                <>
+                  <button
+                    style={{
+                      color: "#fafafa",
+                      backgroundColor: "#3DA3F4",
+                      borderRadius: "15%",
+                      borderColor: "#3DA3F4",
+                      height: "100px",
+                      width: "100px",
+                      cursor: "pointer",
+                    }}
+                    onClick={likeHandler}>
+                    Like 💖
+                  </button>
+                </>
+              )}
+              {isLiked && (
+                <>
+                  <button
+                    style={{
+                      color: "#3DA3F4",
+                      backgroundColor: "white",
+                      borderRadius: "15%",
+                      borderColor: "#3DA3F4",
+                      height: "100px",
+                      width: "100px",
+                      cursor: "pointer",
+                    }}
+                    onClick={UnlikeHandler}>
+                    Unlike 💔
+                  </button>
+                </>
+              )}
+              {likes &&
+                likes.map((like) => (
+                  <Link
+                    to={`/user/${like.username}`}
+                    target='_blank'
+                    className='nounderline'>
+                    <div>
+                      {!like.userphoto && (
+                        <img
+                          src={logo}
+                          alt='profilephoto'
+                          className='user_image'
+                        />
+                      )}
+                      {like.userphoto && (
+                        <img
+                          src={`data:image/jpg;base64,${like.userphoto}`}
+                          alt='profilephoto'
+                          className='user_image'
+                        />
+                      )}
+                      {like.username && <div>{" " + like.username}</div>}
+                      {!like.username && <div>Demo User/Group</div>}
+                    </div>
+                  </Link>
+                ))}
+            </div>
+          </div>
+          <br></br>
           {/*Comment Section */}
           <br />
           <br />
@@ -277,76 +382,6 @@ function TweetPage(props) {
               <br></br>
               <br></br>
             </div>
-
-            {/*Like Section*/}
-            <div>
-              Liked by:
-              <br />
-              <br />
-              <div className='carousel'>
-                {!isLiked && (
-                  <>
-                    <button
-                      style={{
-                        color: "#fafafa",
-                        backgroundColor: "#3DA3F4",
-                        borderRadius: "15%",
-                        borderColor: "#3DA3F4",
-                        height: "100px",
-                        width: "100px",
-                        cursor: "pointer",
-                      }}
-                      onClick={likeHandler}>
-                      Like 💖
-                    </button>
-                  </>
-                )}
-                {isLiked && (
-                  <>
-                    <button
-                      style={{
-                        color: "#3DA3F4",
-                        backgroundColor: "white",
-                        borderRadius: "15%",
-                        borderColor: "#3DA3F4",
-                        height: "100px",
-                        width: "100px",
-                        cursor: "pointer",
-                      }}
-                      onClick={UnlikeHandler}>
-                      Unlike 💔
-                    </button>
-                  </>
-                )}
-                {likes &&
-                  likes.map((like) => (
-                    <Link
-                      to={`/user/${like.username}`}
-                      target='_blank'
-                      className='nounderline'>
-                      <div>
-                        {!like.userphoto && (
-                          <img
-                            src={logo}
-                            alt='profilephoto'
-                            className='user_image'
-                          />
-                        )}
-                        {like.userphoto && (
-                          <img
-                            src={`data:image/jpg;base64,${like.userphoto}`}
-                            alt='profilephoto'
-                            className='user_image'
-                          />
-                        )}
-                        {like.username && <div>{" " + like.username}</div>}
-                        {!like.username && <div>Demo User/Group</div>}
-                      </div>
-                    </Link>
-                  ))}
-              </div>
-            </div>
-            <br></br>
 
             {comments &&
               comments.map((comment) => (
@@ -385,7 +420,7 @@ function TweetPage(props) {
                           backgroundColor: "#3DA3F4",
                           borderRadius: "8px",
                           borderColor: "#3DA3F4",
-                          cursor: "pointer"
+                          cursor: "pointer",
                         }}
                         onClick={(e) => deleteCommentHandler(comment._id)}>
                         Delete

@@ -119,10 +119,16 @@
 }
 
 .create {
-  max-width: 400px;
   margin: 0 auto;
   text-align: center;
+  justify-content: center;
 }
+
+.create > form {
+  justify-content: center;
+  align-items: center;
+}
+
 .create label {
   text-align: left;
   display: block;
@@ -138,7 +144,9 @@
   width: 100%;
   padding: 6px 10px;
   margin: 10px 0;
-  border: 1px solid #ddd;
+  border: 1px solid #1da1f2;
+  color: black;
+  background-color: white;
   box-sizing: border-box;
   display: block;
   border-radius: 8px;

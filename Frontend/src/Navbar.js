@@ -37,7 +37,7 @@ const Navbar = () => {
             <Link to='/groups'>💖 Groups</Link>
             <Link to='/users'>🧔🏻 Users</Link>
             <Link to='/polls'>🚀 Polls</Link>
-            <Link to='/chats'>📜 Chats</Link>
+            {/* <Link to='/chats'>📜 Chats</Link> */}
             <Link to='/' onClick={onLogOut}>
               🏃🏻‍♀️ Log Out
             </Link>

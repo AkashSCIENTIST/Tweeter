@@ -32,7 +32,7 @@ function MyApp() {
             <Route exact path='/create' element={<NewTweet />}></Route>
             <Route path='/signup' exact element={<SignUp />}></Route>
             <Route path='/signin' exact element={<SignIn />}></Route>
-            <Route path='/chats' exact element={<ChatPage />}></Route>
+            {/* <Route path='/chats' exact element={<ChatPage />}></Route> */}
             <Route path='/new_poll' exact element={<NewPoll />}></Route>
             <Route path='/vote/:pollid' exact element={<Vote />}></Route>
             <Route path='/users' exact element={<AllUsers />}></Route>

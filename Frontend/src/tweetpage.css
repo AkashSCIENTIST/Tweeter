@@ -112,3 +112,19 @@
 .comment_section {
   transform: translateX(50px);
 }
+
+.tweetphoto{
+  max-width: 550px;
+  max-height: 550px;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.contenttext{
+  font-size: x-large;
+}
+
+.contenttime {
+  font-size: medium;
+  color: gray;
+}

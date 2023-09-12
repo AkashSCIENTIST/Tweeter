@@ -89,7 +89,7 @@ def tweetFeed(username):
 
 def single_tweet(tweetid):
     query = '''
-    select users.username, (users.fname || ' ' || users.lname) as author, users.photo as userphoto, tweet.tweetid, tweet.content_, tweet.photo
+    select users.username, (users.fname || ' ' || users.lname) as author, users.photo as userphoto, tweet.tweetid, tweet.content_, tweet.photo, tweet.time_
     from tweet inner join users on
     tweet.author = users.username and tweet.tweetid = {}
     '''.format(tweetid)

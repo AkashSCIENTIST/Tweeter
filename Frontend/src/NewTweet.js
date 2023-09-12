@@ -24,7 +24,6 @@ function post(url, body, callback) {
   })
     .then((json) => {
       console.log(json);
-      alert();
       callback(json);
     })
     .catch((err) => {
@@ -48,10 +47,10 @@ const Create = () => {
     console.log("username: ", username);
     const tweet = { username: username, content, photo };
     console.log(tweet);
+    alert(JSON.stringify(tweet));
 
     post("http://localhost:5000/new_tweet", tweet, (res) => {
       console.log(res);
-      alert("POsted");
       navigate("/");
     });
   }
@@ -60,15 +59,29 @@ const Create = () => {
     <div className='create'>
       <h2>New Tweet</h2>
       <form onSubmit={handleSubmit}>
-        <label>Content:</label>
-        <input
-          type='text'
-          required
-          onChange={(e) => setContent(e.target.value)}
-        />
-        <label>Photo:</label>
-        <input type='file' onChange={(e) => setPhoto(e.target.files[0])} />
-        <button>Add Tweet</button>
+        <center>
+          <h3>Content:</h3>
+          <textarea
+            style={{
+              width: "90%",
+              whiteSpace: "pre-wrap",
+              overflow: "auto",
+              fontSize: "20px",
+            }}
+            required
+            value={content}
+            rows={5}
+            cols={40}
+            placeholder='Type your content here...'
+            onChange={(e) => {
+              setContent(e.target.value);
+              console.log(e.target.value);
+            }}
+          />
+          <h3>Photo:</h3>
+          <input type='file' onChange={(e) => setPhoto(e.target.files[0])} />
+          <button>Add Tweet</button>
+        </center>
       </form>
     </div>
   );
