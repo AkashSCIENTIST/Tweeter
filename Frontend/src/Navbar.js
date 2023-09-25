@@ -24,7 +24,7 @@ const Navbar = () => {
         {username && (
           <p>
             &nbsp;&nbsp;user:
-            <a href={`/user/${username}`} target='_blank' rel='noreferrer'>
+            <a href={`/user/${username}`} rel='noreferrer'>
               {username}
             </a>
           </p>

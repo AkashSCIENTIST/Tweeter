@@ -112,10 +112,7 @@ const GroupProfile = (props) => {
         <br></br>
         {admin && (
           <h3>
-            Admin :{" "}
-            <Link to={`/user/${admin}`} target='_blank'>
-              @{admin}
-            </Link>
+            Admin : <Link to={`/user/${admin}`}>@{admin}</Link>
           </h3>
         )}
         {!admin && <h3>Admin placeholder</h3>}
@@ -160,10 +157,7 @@ const GroupProfile = (props) => {
             {grpmem &&
               grpmem.map((user) => (
                 <div key={user.username}>
-                  <Link
-                    to={`/user/${user.username}`}
-                    target='_blank'
-                    className='nounderline'>
+                  <Link to={`/user/${user.username}`} className='nounderline'>
                     <div>
                       {!user.photo && (
                         <img

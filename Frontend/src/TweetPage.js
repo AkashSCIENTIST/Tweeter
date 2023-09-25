@@ -204,10 +204,7 @@ function TweetPage(props) {
             {tweetData &&
               tweetData.map((data) => (
                 <div className='tweet' key={`tweet_id_${data.tweetid}`}>
-                  <Link
-                    to={`/user/${data.username}`}
-                    target='_blank'
-                    className='nounderline'>
+                  <Link to={`/user/${data.username}`} className='nounderline'>
                     <div className='tweetheader'>
                       {data.userphoto && (
                         <img
@@ -315,10 +312,7 @@ function TweetPage(props) {
               )}
               {likes &&
                 likes.map((like) => (
-                  <Link
-                    to={`/user/${like.username}`}
-                    target='_blank'
-                    className='nounderline'>
+                  <Link to={`/user/${like.username}`} className='nounderline'>
                     <div>
                       {!like.userphoto && (
                         <img
@@ -381,7 +375,6 @@ function TweetPage(props) {
                   <div className='comment'>
                     <Link
                       to={`/user/${comment.username}`}
-                      target='_blank'
                       className='nounderline'>
                       <div className='userdata'>
                         {!comment.userphoto && (

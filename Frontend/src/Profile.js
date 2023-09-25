@@ -75,10 +75,7 @@ const Profile = ({ data }) => {
             {followers &&
               followers.map((user) => (
                 <div key={user.username}>
-                  <Link
-                    to={`/user/${user.username}`}
-                    target='_blank'
-                    className='nounderline'>
+                  <Link to={`/user/${user.username}`} className='nounderline'>
                     <div>
                       {!user.photo && (
                         <img
@@ -112,10 +109,7 @@ const Profile = ({ data }) => {
           )}
           {!(data.profile?.fname + data?.lname) && <h3> Name </h3>}
           {data.profile.website && (
-            <a
-              href={`${data.profile?.website}`}
-              target='_blank'
-              rel='noreferrer'>
+            <a href={`${data.profile?.website}`} rel='noreferrer'>
               <h5>{data.profile.website}</h5>
             </a>
           )}

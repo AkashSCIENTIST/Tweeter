@@ -7,7 +7,10 @@ function MiniTweet(props) {
   return (
     <div className='tweet'>
       {/* <Link to={`/tweetpage/${props.tweetid}`} className="nounderline" target={"_blank"}> */}
-      <a href={`/tweetpage/${props.tweetid}`} target='_blank' rel='noreferrer' className="nounderline">
+      <a
+        href={`/tweetpage/${props.tweetid}`}
+        rel='noreferrer'
+        className='nounderline'>
         <div className='tweetheader'>
           {props.userphoto && (
             <img

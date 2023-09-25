@@ -12,11 +12,11 @@ function AllUsers() {
     });
   }, []);
   return (
-    <div className="carousel">
+    <div className='carousel'>
       {data &&
         data.map((user) => (
           <div key={user.username}>
-            <Link to={`/user/${user.username}`} target='_blank' className="nounderline">
+            <Link to={`/user/${user.username}`} className='nounderline'>
               <div>
                 {!user.userphoto && (
                   <img src={logo} alt='profilephoto' className='user_image' />

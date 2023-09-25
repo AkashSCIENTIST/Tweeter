@@ -127,17 +127,13 @@ const Vote = () => {
         },
       ],
     });
-
   };
 
   return (
     <>
       <p>
         Poll by :{" "}
-        <a
-          href={`http://localhost:3000/user/${author}`}
-          target='_blank'
-          rel='noreferrer'>
+        <a href={`http://localhost:3000/user/${author}`} rel='noreferrer'>
           @{author}
         </a>
       </p>
@@ -199,7 +195,7 @@ const Vote = () => {
               borderColor: "#3DA3F4",
               height: "50px",
               width: "120px",
-              cursor: "pointer"
+              cursor: "pointer",
             }}>
             Delete Poll
           </button>

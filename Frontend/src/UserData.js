@@ -10,7 +10,7 @@ function UserData(props) {
 
   return (
     <>
-      <Link to={`/user/${props.username}`} target='_blank'>
+      <Link to={`/user/${props.username}`}>
         <div className='userdata'>
           {!props.photo && (
             <img src={logo} alt='profilephoto' className='user_image' />
