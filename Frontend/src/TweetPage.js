@@ -52,17 +52,9 @@ function TweetPage(props) {
   const [isLiked, setIsLiked] = useState();
 
   function openimg(base64img) {
-    var w = window.open("about:blank");
-
-    // FireFox seems to require a setTimeout for this to work.
-    setTimeout(() => {
-      w.document.body.appendChild(w.document.createElement("iframe")).src =
-        base64img;
-      w.document.body.style.margin = 0;
-      w.document.getElementsByTagName("iframe")[0].style.width = "100%";
-      w.document.getElementsByTagName("iframe")[0].style.height = "100%";
-      w.document.getElementsByTagName("iframe")[0].style.border = 0;
-    }, 0);
+    console.log(base64img);
+    var newTab = window.open();
+    newTab.document.body.innerHTML = `<img src='${base64img}'></img>`;
   }
 
   function submitHandler(e) {
@@ -281,8 +273,8 @@ function TweetPage(props) {
           </div>
           {/*Like Section*/}
           <div>
-            <br/>
-            <br/>
+            <br />
+            <br />
             Liked by:
             <br />
             <br />
