@@ -6,6 +6,8 @@
 /Frontend/.pnp.js
 /Frontend/db.json
 /Backend/__pycache__
+/node_modules
+/Frontend/public
 
 # testing
 /coverage
