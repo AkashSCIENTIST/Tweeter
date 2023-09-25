@@ -276,7 +276,7 @@ function TweetPage(props) {
             <br />
             <br />
             <div className='carousel'>
-              {!isLiked && (
+              {username && !isLiked && (
                 <>
                   <button
                     style={{
@@ -293,7 +293,7 @@ function TweetPage(props) {
                   </button>
                 </>
               )}
-              {isLiked && (
+              {username && isLiked && (
                 <>
                   <button
                     style={{
