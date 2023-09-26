@@ -35,14 +35,6 @@ def home():
 
 @app.route('/user/<user>', methods=['GET'])
 def user(user):
-    conn = psycopg2.connect(
-        database = "postgres",
-        user = "postgres",
-        password = "root",
-        host = "localhost",
-        port = "5432"
-    )
-    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
     query = "select * from users where username = '{}'".format(user)
     cur.execute(query)
     data = [dict(i) for i in cur.fetchall()]
@@ -58,9 +50,9 @@ def user(user):
     data = cur.fetchall()
     data2 = [dict(i) for i in data]
     d['tweets'] = data2
+
     d['followers'] = getFollowersOf(user)
-    conn.commit()
-    conn.close()
+
     return jsonify(d)
 
 
@@ -82,14 +74,6 @@ def feed(user):
 
 @app.route('/tweets_by_user/<username>')
 def tweets_by_user(username):
-    conn = psycopg2.connect(
-        database="postgres",
-        user="postgres",
-        password="root",
-        host="localhost",
-        port="5432"
-    )
-    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
     query = '''
     select users.username, (users.fname || ' ' || users.lname) as author, users.photo as userphoto, tweet.tweetid, tweet.content_, tweet.photo
     from tweet inner join users on
@@ -98,8 +82,6 @@ def tweets_by_user(username):
     cur.execute(query)
     data = cur.fetchall()
     data2 = [dict(i) for i in data]
-    conn.commit()
-    conn.close()
     return jsonify(data2)
 
 

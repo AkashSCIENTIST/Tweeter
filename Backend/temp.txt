@@ -1,0 +1,15 @@
+@app.route('/new_tweet', methods=['POST'])
+@cross_origin()
+def new_tweet():
+    data = dict(request.form)
+    files = request.files
+    username = data['username']
+    content = data['content']
+    if data['photo'] == '':
+        photo = ''
+    else:
+        photo = hexToBase64(binaryFromPhotoObject(data["photo"]))
+    print(data)
+    print("image : ", photo[:20])
+    newTweet(username, content, photo)
+    return jsonify(data)
