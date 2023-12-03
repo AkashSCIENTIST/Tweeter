@@ -11,9 +11,12 @@ smtp_server = "smtp.gmail.com"
 sender_email = "sender_mail"
 password = "sender_mail_password"
 
+USER = "postgres"
+PASSWORD = "root"
+
 # conn = psycopg2.connect(
 #     database = "postgres",
-#     user = "postgres",
+#     user = USER,
 #     password = "root",
 #     host = "localhost",
 #     port = "5432"
@@ -39,8 +42,8 @@ def binaryFromPhotoObject(obj):
 def newUser(username, location, bio, mailid, website, firstname, lastname, photo, dateofbirth):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -65,8 +68,8 @@ def newUser(username, location, bio, mailid, website, firstname, lastname, photo
 def changePhoto(username, photo):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -82,8 +85,8 @@ def changePhoto(username, photo):
 def changeGroupPhoto(groupname, photo):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -98,8 +101,8 @@ def changeGroupPhoto(groupname, photo):
 def deleteUser(username):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -113,8 +116,8 @@ def deleteUser(username):
 def newLike(tweet_id, user_id):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -129,8 +132,8 @@ def newLike(tweet_id, user_id):
 def newComment(tweet_id, username, content):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -147,8 +150,8 @@ def newComment(tweet_id, username, content):
 def newUnlike(tweet_id, user_id):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -164,8 +167,8 @@ def newUnlike(tweet_id, user_id):
 def tweetFeed(username):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -190,8 +193,8 @@ def tweetFeed(username):
 def single_tweet(tweetid):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -212,8 +215,8 @@ def single_tweet(tweetid):
 def likesByTweeterId(tweetid):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -234,8 +237,8 @@ def likesByTweeterId(tweetid):
 def Auth(username):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -252,8 +255,8 @@ def Auth(username):
 def commentsByTweetId(tweetid):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -276,8 +279,8 @@ def commentsByTweetId(tweetid):
 def newPoll(data):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -308,8 +311,8 @@ def newPoll(data):
 def getPollDetails(pollid):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -347,8 +350,8 @@ def getPollDetails(pollid):
 def isFollowing(curuser, user):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -367,8 +370,8 @@ def isFollowing(curuser, user):
 def newFollow(curuser, user):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -384,8 +387,8 @@ def newFollow(curuser, user):
 def newUnfollow(curuser, user):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -401,8 +404,8 @@ def newUnfollow(curuser, user):
 def castVote(username, pollid, option):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -423,8 +426,8 @@ def castVote(username, pollid, option):
 def getPollFeed():
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -446,8 +449,8 @@ def getPollFeed():
 def newTweet(username, content, photo):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -468,8 +471,8 @@ def newTweet(username, content, photo):
 def getAllUsers():
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -486,8 +489,8 @@ def getAllUsers():
 def getAllGroups():
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -504,8 +507,8 @@ def getAllGroups():
 def getGroupDetail(grpname, username):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -522,8 +525,8 @@ def getGroupDetail(grpname, username):
 def isMemberOfGroup(grpname, username):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -541,8 +544,8 @@ def isMemberOfGroup(grpname, username):
 def joinGroup(grpname, username):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -559,8 +562,8 @@ def joinGroup(grpname, username):
 def leaveGroup(grpname, username):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -577,8 +580,8 @@ def leaveGroup(grpname, username):
 def getAllGroupMembers(grpname):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -598,8 +601,8 @@ def getAllGroupMembers(grpname):
 def newGroup(photo, admin, groupname, groupbio):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -616,8 +619,8 @@ def newGroup(photo, admin, groupname, groupbio):
 def getFollowersOf(user):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -635,8 +638,8 @@ def getFollowersOf(user):
 def deleteTweetById(tweet_id):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -652,8 +655,8 @@ def deleteTweetById(tweet_id):
 def deleteCommentById(comment_id):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )
@@ -669,8 +672,8 @@ def deleteCommentById(comment_id):
 def deletePollById(poll_id):
     conn = psycopg2.connect(
         database="postgres",
-        user="postgres",
-        password="root",
+        user = USER,
+        password = PASSWORD,
         host="localhost",
         port="5432"
     )

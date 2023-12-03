@@ -228,7 +228,7 @@ function TweetPage(props) {
                   <br></br>
                   <p className='contenttext'>{data.content_}</p>
                   <br></br>
-                  {data.photo && (
+                  {data.photo && data.photo !== 'None' && (
                     <>
                       <br />
                       <center>

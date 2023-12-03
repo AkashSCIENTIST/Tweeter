@@ -47,7 +47,7 @@ const Create = () => {
     console.log("username: ", username);
     const tweet = { username: username, content, photo };
     console.log(tweet);
-    alert(JSON.stringify(tweet));
+    // alert(JSON.stringify(tweet));
 
     post("http://localhost:5000/new_tweet", tweet, (res) => {
       console.log(res);
